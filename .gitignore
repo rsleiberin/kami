@@ -4,4 +4,4 @@ __pycache__/
 *.env
 myenv/
 airtableGetter.py
-chat_gpt.py
+config.py
