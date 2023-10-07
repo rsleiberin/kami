@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.pyo
+*.env
+myenv/
+airtableGetter.py
+chat_gpt.py
