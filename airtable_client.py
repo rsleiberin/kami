@@ -2,6 +2,7 @@ from pyairtable import Api
 import inspect
 import config
 import logging
+from utils import get_methods
 
 api_key = config.AIRTABLE_PERSONAL_ACCESS_TOKEN
 
@@ -39,53 +40,33 @@ class AirtableClient:
         self.table_dictionary = {}
     
     def get_methods(self):
-        """Returns dictionary of method names, docstrings, and argument signatures."""
-        try:
-            methods = {
-            func: {
-                'args': inspect.signature(getattr(self, func)).parameters.keys(),
-                'doc': getattr(self, func).__doc__.split('\n')[0] if getattr(self, func).__doc__ else ''
-            } 
-            for func in dir(self) 
-            if callable(getattr(self, func)) and not func.startswith("__")
-            }
-            return methods
-        except Exception as e:
-            print(e)
-            logging.error(str(e))
-        
-    #READ
-    #retrieve base dictionary
-    def get_bases(self):
-        """Fetches all bases, updates self.base_dictionary, returns dict_keys of base names."""
-        try:    
-            return self.base_dictionary.keys()
-        except Exception as e:
-            logging.error(str(e))
+        return get_methods(self)
+    class Read:
+        """Encapsulates read operations for AirtableClient. Provides methods to retrieve bases, tables, and records."""
+        pass
+        def get_methods(self):
+            return get_methods(self)
+        #retrieve table dictionary
+        def get_tables(self):
+            """Fetches all tables, updates self.table_dictionary, returns dict_keys of table names."""
+            try:
+                self.table_dictionary = static_table_dictionary
+                return self.table_dictionary.keys()
+            except Exception as e:
+                logging.error(str(e))
 
 
-
-    #retrieve table dictionary
-    def get_tables(self):
-        """Fetches all tables, updates self.table_dictionary, returns dict_keys of table names."""
-        try:
-            self.table_dictionary = static_table_dictionary
-            return self.table_dictionary.keys()
-        except Exception as e:
-            logging.error(str(e))
-
-
-    #retrieve records using table name
-    def get_records(self, table_name):
-        """Fetches all records from specified table_name, returns list of dictionary records."""
-        try:
-            # Access a table by name from the baseID and tableID
-            table = self.api.table(self.active_baseID, self.table_dictionary.get(table_name))
-            # Use the table instance to get all records
-            records= table.all()
-            return records
-        except Exception as e:
-            logging.error(str(e))
+        #retrieve records using table name
+        def get_records(self, table_name):
+            """Fetches all records from specified table_name, returns list of dictionary records."""
+            try:
+                # Access a table by name from the baseID and tableID
+                table = self.api.table(self.active_baseID, self.table_dictionary.get(table_name))
+                # Use the table instance to get all records
+                records= table.all()
+                return records
+            except Exception as e:
+                logging.error(str(e))
 '''
 to-do
 def get_record_by_id(self, table_name, record_id):
@@ -107,6 +88,7 @@ def search_records(self, table_name, query):
 if __name__ == "__main__":
     instance = AirtableClient('1')
     print (instance.get_methods())
+    print (instance.Read().get_methods())
 
 '''
 if __name__ == "__main__":
