@@ -36,15 +36,21 @@ class AirtableClient:
         self.api = Api(api_key)
         self.base_dictionary ={'Kami':config.AIRTABLE_BASE_ID}
         self.active_baseID = self.base_dictionary['Kami']
-        self.table_dictionary = {}
+        self.table_dictionary = static_table_dictionary
+
     
     def get_methods(self):
         return get_methods(self)
 
     class Read:
         """Encapsulates read operations for AirtableClient. Provides methods to retrieve bases, tables, and records."""
-        pass
+        def __init__(self, parent):
+            """Initializes Read with inherited keys from the parent AirtableClient."""
+            self.api = parent.api
+            self.active_baseID = parent.active_baseID
+            self.table_dictionary = parent.table_dictionary
 
+        @classmethod
         def get_methods(self):
             return get_methods(self)
 
@@ -52,6 +58,7 @@ class AirtableClient:
         def get_tables(self):
             """Fetches all tables, updates self.table_dictionary, returns dict_keys of table names."""
             try:
+                #need to add functionality
                 self.table_dictionary = static_table_dictionary
                 return self.table_dictionary.keys()
             except Exception as e:
@@ -61,15 +68,21 @@ class AirtableClient:
         #retrieve records using table name
         def get_records(self, table_name):
             """Fetches all records from specified table_name, returns list of dictionary records."""
+            print("Current table_dictionary:", self.table_dictionary)
+
             try:
-                # Access a table by name from the baseID and tableID
-                table = self.api.table(self.active_baseID, self.table_dictionary.get(table_name))
-                # Use the table instance to get all records
-                records= table.all()
+                table_id = self.table_dictionary.get(table_name, "INVALID_TABLE_ID")
+                if table_id == "INVALID_TABLE_ID":
+                    raise ValueError(f"Invalid table name: {table_name}")
+
+                table = self.api.table(self.active_baseID, table_id)
+                records = table.all()
                 return records
             except Exception as e:
                 logging.error(str(e))
- 
+                print(f"Error: {str(e)}")  # Print the exception for troubleshooting
+                return []
+        
         def get_record_by_id(self, table_name, record_id):
             """
             Fetches a single record by its ID from the specified table.
@@ -107,6 +120,7 @@ class AirtableClient:
             except Exception as e:
                 logging.error(f"Failed to get records with filter: {str(e)}")
                 return []  # or however you want to handle errors
+        
         def get_records_sorted(self, table_name, sort_field, ascending=True):
             """
             Fetches all records from a specified table, sorted by a specified field.
@@ -128,6 +142,7 @@ class AirtableClient:
             except Exception as e:
                 logging.error(f"Error in get_records_sorted: {str(e)}")
                 return None
+        
         def get_records_paginated(self, table_name, page_size, page_number):
             """
             Fetches a paginated set of records from a specified table.
@@ -151,6 +166,7 @@ class AirtableClient:
             except Exception as e:
                 logging.error(f"Error in get_records_paginated: {str(e)}")
                 return None
+        
         def get_records_by_date_range(self, table_name, start_date, end_date):
             """
             Fetches records from a specified table that fall within a specified date range.
@@ -174,6 +190,7 @@ class AirtableClient:
             except Exception as e:
                 logging.error(f"Error in get_records_by_date_range: {str(e)}")
                 return None
+        
         def get_records_with_fields(self, table_name, fields_list):
             """
             Fetches specified fields from all records in a specified table.
@@ -194,6 +211,7 @@ class AirtableClient:
             except Exception as e:
                 logging.error(f"Error in get_records_with_fields: {str(e)}")
                 return None
+        
         def search_records(self, table_name, query):
             """
             Searches for records in a specified table based on a query.
@@ -216,9 +234,9 @@ class AirtableClient:
                 return None
 
 if __name__ == "__main__":
-    instance = AirtableClient('1')
-    print (instance.get_methods())
-    print (instance.Read().get_methods())
+    instance = AirtableClient(config.AIRTABLE_PERSONAL_ACCESS_TOKEN)
+    read_instance = instance.Read(instance)  # Create an instance of the Read inner class
+    print(AirtableClient.Read.get_methods())
 
 '''
 if __name__ == "__main__":

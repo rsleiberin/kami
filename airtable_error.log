@@ -1,1 +1,330 @@
 ERROR:root:name 'inspect' is not defined
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 141-881-520
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:36:39] "[33mGET /config HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:36:39] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+ERROR:app:Exception on /get_data/tables [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+TypeError: generate_tests() got an unexpected keyword argument 'table_name'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:40:34] "[35m[1mGET /get_data/tables HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:40:35] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:40:38] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 141-881-520
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:41:36] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:41:43] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:werkzeug: * Detected change in '/home/tank/kami/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 141-881-520
+INFO:werkzeug: * Detected change in '/home/tank/kami/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 141-881-520
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:47:27] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:app:Exception on /get_data/tables [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+TypeError: show_config() got an unexpected keyword argument 'table_name'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:48:55] "[35m[1mGET /get_data/tables HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:51:53] "[33mGET /config HTTP/1.1[0m" 404 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:52:39] "GET /config HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:52:56] "GET /generate_tests HTTP/1.1" 200 -
+ERROR:app:Exception on /get_data/tables [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 16, in get_data
+    records = airtable_client.get_records(table_name)
+AttributeError: module 'modules.databases.airtable_client.airtable_client' has no attribute 'get_records'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:53:23] "[35m[1mGET /get_data/tables HTTP/1.1[0m" 500 -
+ERROR:app:Exception on /get_data/Tables [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 16, in get_data
+    records = airtable_client.get_records(table_name)
+AttributeError: module 'modules.databases.airtable_client.airtable_client' has no attribute 'get_records'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:53:47] "[35m[1mGET /get_data/Tables HTTP/1.1[0m" 500 -
+ERROR:app:Exception on /get_data/Tables [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 16, in get_data
+    records = airtable_client.get_records(table_name)
+AttributeError: module 'modules.databases.airtable_client.airtable_client' has no attribute 'get_records'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:53:50] "[35m[1mGET /get_data/Tables HTTP/1.1[0m" 500 -
+ERROR:app:Exception on /get_data/Sockets [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 16, in get_data
+    records = airtable_client.get_records(table_name)
+AttributeError: module 'modules.databases.airtable_client.airtable_client' has no attribute 'get_records'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 15:54:00] "[35m[1mGET /get_data/Sockets HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:kami.app:Exception on /get_data/Sockets [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 20, in get_data
+    records = airtable_client.get_records(table_name)
+AttributeError: module 'modules.databases.airtable_client.airtable_client' has no attribute 'get_records'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 16:16:12] "[35m[1mGET /get_data/Sockets HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:kami.app:Exception on /get_data/Sockets [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 20, in get_data
+    records = airtable_client.Read.get_records(table_name)
+AttributeError: module 'modules.databases.airtable_client.airtable_client' has no attribute 'Read'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 17:17:21] "[35m[1mGET /get_data/Sockets HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:kami.app:Exception on /get_data/Sockets [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 20, in get_data
+    records = airtable_client.Read.get_records(table_name)
+AttributeError: module 'modules.databases.airtable_client.airtable_client' has no attribute 'Read'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:17:54] "[35m[1mGET /get_data/Sockets HTTP/1.1[0m" 500 -
+ERROR:kami.app:Exception on /get_data/tables [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 20, in get_data
+    records = airtable_client.Read.get_records(table_name)
+AttributeError: module 'modules.databases.airtable_client.airtable_client' has no attribute 'Read'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:18:00] "[35m[1mGET /get_data/tables HTTP/1.1[0m" 500 -
+ERROR:kami.app:Exception on /get_data/tables [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 20, in get_data
+    records = airtable_client.Read.get_records(table_name)
+AttributeError: module 'modules.databases.airtable_client.airtable_client' has no attribute 'Read'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:18:01] "[35m[1mGET /get_data/tables HTTP/1.1[0m" 500 -
+ERROR:kami.app:Exception on /get_data/Tables [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 20, in get_data
+    records = airtable_client.Read.get_records(table_name)
+AttributeError: module 'modules.databases.airtable_client.airtable_client' has no attribute 'Read'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:18:04] "[35m[1mGET /get_data/Tables HTTP/1.1[0m" 500 -
+ERROR:kami.app:Exception on /get_data/Tables [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 20, in get_data
+    print('hi')
+AttributeError: module 'modules.databases.airtable_client.airtable_client' has no attribute 'Read'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:20:32] "[35m[1mGET /get_data/Tables HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:20:45] "[33mGET /get_data/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:21:01] "GET /config HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:21:09] "[35m[1mGET /generate_tests HTTP/1.1[0m" 500 -
+ERROR:kami.app:Exception on /get_data/tables [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 20, in get_data
+    # Create an instance of AirtableClient
+AttributeError: module 'modules.databases.airtable_client.airtable_client' has no attribute 'Read'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:36:10] "[35m[1mGET /get_data/tables HTTP/1.1[0m" 500 -
+ERROR:kami.app:Exception on /get_data/tables [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 20, in get_data
+    # Create an instance of AirtableClient
+AttributeError: module 'modules.databases.airtable_client.airtable_client' has no attribute 'Read'
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:38:10] "[35m[1mGET /get_data/tables HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:kami.app:Exception on /get_data/tables [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 22, in get_data
+    airtable_instance = airtable_client.AirtableClient(api_key)
+NameError: name 'api_key' is not defined
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:38:21] "[35m[1mGET /get_data/tables HTTP/1.1[0m" 500 -
+ERROR:kami.app:Exception on /get_data/tables [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 22, in get_data
+    def get_data(table_name):
+NameError: name 'api_key' is not defined
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:39:52] "[35m[1mGET /get_data/tables HTTP/1.1[0m" 500 -
+ERROR:kami.app:Exception on /get_data/tables [GET]
+Traceback (most recent call last):
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/tank/kami/kami/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/tank/kami/app.py", line 22, in get_data
+    def get_data(table_name):
+NameError: name 'api_key' is not defined
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:40:14] "[35m[1mGET /get_data/tables HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:root:Invalid table name: tables
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:40:40] "GET /get_data/tables HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:40:59] "GET /get_data/Tables HTTP/1.1" 200 -
