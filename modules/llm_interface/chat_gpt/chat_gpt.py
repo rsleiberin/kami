@@ -1,192 +1,131 @@
 import openai
 import config
-import json  
-
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
+import json
+import logging
 from modules.utils.utils import get_methods
-
-import inspect
 from modules.databases.airtable_client.airtable_client import AirtableClient
+from modules.llm_interface.state_tracker import FunctionState
+
+# Initialize logging
+logging.basicConfig(filename='chat_gpt_error.log', level=logging.ERROR)
+
 
 class ChatGPT:
-    def __init__(self):
-        # Setting up the API key for OpenAI
+    def __init__(self, modules=None, llm_switcher=None):
         openai.api_key = config.OPENAI_API_KEY
-        self.airtable = AirtableClient(config.AIRTABLE_PERSONAL_ACCESS_TOKEN)  # Assuming you've set this in config
-        # Initializing the conversation with a system message
-        self.all_classes = {
-            "AirtableClient": self.airtable,
-        }
+        self.function_state = FunctionState()
+        self.airtable = AirtableClient(config.AIRTABLE_PERSONAL_ACCESS_TOKEN)
+        self.modules = modules if modules else {}
+        self.llm_switcher = llm_switcher
         self.messages = [
             {"role": "system", "content": "Scenario: You are learning how to become AGI through self inspection."},
             {"role": "system", "content": "Resources: You have classes, each class has the 'get_methods()' function that returns a docstring of the relevant class."},
-            {"role": "system", "content": "Task: examine your available classes and talk about uses you can perform with them as you explore. All messages are recorded, this is a personal exploration exercise."},
+            {"role": "system", "content": "Task: examine your available classes by using the run() command and exploriong. Talk about uses you can perform with them as you explore. All messages are recorded, this is a personal exploration exercise."},
             ]
         self.functions = [
             {
-                "name": "explore_class_methods",
-                "description": "Explore methods of a given class.",
+                "name": "run",
+                "description": "If empty returns all classes, otherwise use .get_methods() on end of class to return all methods of a given class.",
                 "parameters": {
                     "type": "object",
                     "properties": {
-                        "class_name": {
+                        "code": {
                             "type": "string",
-                            "description": "The name of the class to explore."
+                            "description": "The code you want to run."
                         }
                     },
                     "required": ["class_name"]
                 }
             }
         ]
-    @classmethod
-    def get_methods(cls):
+
+    def get_methods(self):
         """Class method to get methods and docstrings for the ChatGPT class."""
-        return get_methods(cls)
-
-    def explore_environment(self):
-        """
-        Explores the ChatGPT environment, listing down all available methods and properties.
-
-        Returns:
-            dict: A structured dictionary detailing methods, properties, and their docstrings and args.
-        """
-        chat_gpt_structure = get_methods(self)
-
-        for class_name, class_instance in self.all_classes.items():
-            chat_gpt_structure[class_name] = get_methods(class_instance)
-
-        return chat_gpt_structure
-
-    
-    def get_available_tables(self):
-        """Fetches available tables using AirtableClient's Read functions."""
         try:
-            return self.airtable.Read().get_tables()
+            return get_methods(self)
         except Exception as e:
-            return f"Error fetching tables: {str(e)}"
-    
-    def explore_class_methods(self, class_name):
-        """
-        Fetches methods' docstrings for a specified class using the get_methods() function.
-
-        Args:
-            class_name (str): The name of the class to explore.
-
-        Returns:
-            dict or str: A dictionary containing method names and their respective docstrings 
-                        or an error message.
-        """
-        print(f"Function 'explore_class_methods' called with class_name: {class_name}")
-
-        if class_name == "functions":
-            # Return the available functions
-            functions_list = [func["name"] for func in self.functions]
-            print("Detected 'functions' as class_name. Available functions:", functions_list)
-            return {"available_functions": functions_list}
-
-        try:
-            # Assuming all your classes are in a dictionary called 'all_classes'
-            target_class = self.all_classes.get(class_name)
-            if not target_class:
-                return_msg = f"No class named {class_name} found."
-                print(return_msg)  # Debug print statement
-                return return_msg
-
-                        # First, get the methods of the class itself
-            methods_info = target_class.get_methods()
-
-            # Then, for each method, check if it's a class and get its methods too
-            for method_name, method_details in methods_info.items():
-                method_instance = getattr(target_class, method_name, None)
-                if inspect.isclass(method_instance):
-                    methods_info[method_name]['sub_methods'] = method_instance.get_methods()
-
-            if methods_info:
-                return methods_info
-            else:
-                return_msg = f"No methods found for the class {class_name}."
-                print(return_msg)  # Debug print statement
-                return return_msg
-        except Exception as e:
-            return {"error": str(e)}
+            logging.error(f"Error in get_methods: {e}")
+            return {}
 
 
     def ask_gpt(self, user_message, depth=0):
         # Appending the user's message to the conversation
         self.messages.append({"role": "user", "content": user_message})
-
         
-        # Direct user command
-        if user_message.lower() == "get available tables":
-            tables = self.get_available_tables()
-            return f"Available tables: {', '.join(tables)}"
-        
-        # Request response from GPT
-        print("Sending the following messages to GPT-3:", self.messages)
+        # Get response from GPT-3
+        self._get_gpt_response()
+    
 
+
+
+    def _get_gpt_response(self):
+        """Get response from GPT-3 based on the current messages."""
         try:
+            print("Messages to GPT-3:", self.messages)  # Debug line
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages=self.messages,
                 functions=self.functions
             )
+            print("Raw GPT-3 response:", response)  # Debug line
+            return self._response_handler(response)
         except openai.error.ServiceUnavailableError:
-            return "I apologize, but the server seems to be overloaded right now. Please try again later."
+            self.messages.append({"role": "assistant", "content": "Server overload. Try again later."})
+            return None
+        except Exception as e:
+            logging.error(f"Error in _get_gpt_response: {e}")
+            return None
 
-        #print response object
-        print("Response object from OpenAI:", response)
-        
-        # Extracting the content of the message from the model's response
-        print("Sending the following messages to GPT-3:", self.messages)
-        assistant_message_content = response.choices[0].message['content']
-        print("GPT Response:", assistant_message_content)
-        if not assistant_message_content:
-            assistant_message_content = "I'm sorry, I couldn't process that request."
-        self.messages.append({"role": "assistant", "content": assistant_message_content})
-        
-        # Checking for a function call in GPT's response
-        function_call = response.choices[0].message.get('function_call', {})
-        function_name = function_call.get("name")
-
-        if function_name == "explore_class_methods":
-            arguments = json.loads(function_call["arguments"])
-            class_name = arguments.get("class_name")
-                    
-            methods_info = self.explore_class_methods(class_name)
-            if methods_info:
-                # Convert the dictionary to a more human-readable string
-                print(methods_info)
-                result_string = '\n'.join(methods_info['available_functions'])
-
-                # Now, send this result back to GPT-3 for further instructions
-                if depth > 5:
-                    return "Depth limit has reached 5, increase limit."
-                return self.ask_gpt(result_string, depth+1)  # Recursive call
-
-
+    def _response_handler(self, response):
+        if response:
+            if 'function_call' in response.choices[0].message:
+                print("Detected function_call in GPT-3 response.")  # Debug line
+                function_call = response.choices[0].message['function_call']
+                return self._handle_gpt_function_calls(function_call)
             else:
-                return "No methods found for this class."
-
-
-        elif "function_name" in function_call:
-            function_call_string = f"Called function: {function_call['function_name']} with arguments: {function_call['args']}"
-            self.messages.append({"role": "assistant", "content": function_call_string})
-
+                content = response.choices[0].message['content']
+                print("Message:", content)
+                return content
         else:
-            self.messages.append({"role": "assistant", "content": assistant_message_content})
-            return assistant_message_content
-        # Default return, in case none of the above conditions were met.
-        return "I'm not sure how to handle that request."
+            print("Ask GPT2")
+            return "I'm sorry, I couldn't process that request."
 
+
+    def _handle_gpt_function_calls(self, function_call):
+        """Handle potential function calls in GPT's response."""
+        try:
+            arguments = json.loads(function_call.get("arguments", "{}"))
+            code = arguments.get("code")
+
+            if code:
+                # Print debugging information
+                print(f"Received code from GPT-3: {code}")
+                
+                # Split the code into class and method parts
+                class_part, method_part = code.rsplit(".", 1)
+                
+                # Use LLMSwitcher to execute the method
+                result = self.llm_switcher.execute_module_method(class_part, method_part)
+                
+                # Print the result for debugging
+                print(f"Execution result: {result}")
+                return result
+            else:
+                return "Command not provided."
+
+        except Exception as e:
+            logging.error(f"Error in _handle_gpt_function_calls: {e}")
+            return "Error executing the command."
+
+
+
+
+            
     @staticmethod
     def run_chatbot_cli():
         """A simple command-line interface for ChatGPT."""
-        
-        # Create an instance of the ChatGPT class
-        chatbot = ChatGPT()
+        llm_switcher = LLMSwitcher()  # Create an instance of LLMSwitcher
+        chatbot = ChatGPT(llm_switcher=llm_switcher)  # Pass it to ChatGPT
         
         print("Welcome to ChatGPT CLI! Type 'exit' to end the chat.")
         
@@ -208,10 +147,12 @@ class ChatGPT:
 
 
     def clear_messages(self):
-        # Clearing the conversation
-        #The forgeting funciton, we deal with memory storage here.
-        #What RANK SHOULD THE MESSAGE RETURN?!?!?
-        self.messages = []
+        """Clear the conversation messages."""
+        try:
+            self.messages = []
+        except Exception as e:
+            logging.error(f"Error clearing messages: {e}")
+    
     
 if __name__ == "__main__":
     ChatGPT.run_chatbot_cli()

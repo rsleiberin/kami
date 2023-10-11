@@ -1,0 +1,32 @@
+ERROR:root:Error in _get_gpt_response: Invalid value for 'content': expected a string, got null.
+ERROR:root:Error in _get_gpt_response: Invalid value for 'content': expected a string, got null.
+ERROR:root:Error in _get_gpt_response: Invalid value for 'content': expected a string, got null.
+ERROR:root:Error in _get_gpt_response: Invalid value for 'content': expected a string, got null.
+ERROR:root:Error in _get_gpt_response: Invalid value for 'content': expected a string, got null.
+ERROR:root:Error in _get_gpt_response: Invalid value for 'content': expected a string, got null.
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:Error in _get_gpt_response: _handle_gpt_function_calls() missing 1 required positional argument: 'depth'
+ERROR:root:No module named classes found.
+ERROR:root:Method get_methods() not found in final module/class.
+ERROR:root:Error in _handle_gpt_function_calls: name 'LLMSwitcher' is not defined
+ERROR:root:Error in _handle_gpt_function_calls: name 'LLMSwitcher' is not defined
+ERROR:root:Error in _handle_gpt_function_calls: name 'LLMSwitcher' is not defined
+ERROR:root:Method get_methods() not found in final module/class.
+ERROR:root:No module named classes.airtable_client found.
+ERROR:root:Method get_methods() not found in module airtable_client.
+ERROR:root:No module named airtable_client found.
+ERROR:root:Method get_methods() not found in module airtable_client.
+ERROR:root:Method get_methods() not found in module airtable_client.
