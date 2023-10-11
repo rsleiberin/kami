@@ -19,14 +19,12 @@ class LLMSwitcher:
 
         #load classes
         self.modules = {
-            "AirtableClient": AirtableClient(config.PERSONAL_ACCESS_TOKEN)
+            "AirtableClient": AirtableClient(config.AIRTABLE_PERSONAL_ACCESS_TOKEN)
         }
         #load sub-classes1
         self.modules["AirtableClient.Read"] = self.modules["AirtableClient"].Read
+        self.modules["chat_gpt"] = ChatGPT(modules=self.modules, llm_switcher=self)  # Initialize ChatGPT with the modules
         #load sub-classes2...
-        
-        self.gpt = ChatGPT(modules=self.modules, llm_switcher=self)  # Initialize ChatGPT with the modules
-        self.modules["chat_gpt"] = self.gpt
 
     def get_methods(self):
         """Get methods for the LLMSwitcher class."""
@@ -143,21 +141,31 @@ class LLMSwitcher:
             return f"Error while using {method_name} from {module_name}: {str(e)}"
 
 if __name__ == "__main__":
-    # The print statements below were for debugging and can be commented out.
-    # print(sys.path)
-    chat = ChatGPT()
-    methods = chat.get_methods()
-    # print("\nMethods of AirtableClient:")
-    # print("airtable_methods: ", methods)
-    print(f"Processing methods: {methods}")
-    for method, details in methods.items():
-        print(f"Processing individual method: {method}")
-        # This print statement formats the output cleanly. You might want to keep it for clarity.
-        print(f"Method: {method}\nArgs: {details['args']}\nDoc: {details['doc']}\n")
+    switcher = LLMSwitcher()
 
-    # The following lines are commented out to reduce verbosity:
-    # gpt_response = chat.ask_gpt("Tell me about the methods of AirtableClient")
-    # print("Messages to GPT-3:", gpt_response)
+    # Display all available modules and their methods.
+    for module_name, module_instance in switcher.modules.items():
+        print(f"Module: {module_name}")
+        methods = module_instance.get_methods()
+        for method_name, details in methods.items():
+            print(f"  Method: {method_name}")
+            print(f"  Args: {details.get('args', [])}")
+            print(f"  Doc: {details.get('doc', '')}")
+        print("-" * 40)
+
+    # You can also add some interactive testing or command-line interface here.
+    # For example:
+    while True:
+        user_input = input("Enter a module.method to execute or 'exit' to quit: ")
+        if user_input == "exit":
+            break
+        elif "." in user_input:
+            module_name, method_name = user_input.split('.', 1)
+            result = switcher.use_module(module_name, method_name)
+            print(f"Result: {result}")
+        else:
+            print("Invalid input. Please enter in the format module.method or 'exit' to quit.")
+
 
 
 
