@@ -328,3 +328,4 @@ INFO:werkzeug:[33mPress CTRL+C to quit[0m
 ERROR:root:Invalid table name: tables
 INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:40:40] "GET /get_data/tables HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [09/Oct/2023 18:40:59] "GET /get_data/Tables HTTP/1.1" 200 -
+ERROR:root:name 'static_table_dictionary' is not defined
