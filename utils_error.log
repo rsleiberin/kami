@@ -30,3 +30,14 @@ ERROR:root:Method get_methods() not found in module airtable_client.
 ERROR:root:No module named airtable_client found.
 ERROR:root:Method get_methods() not found in module airtable_client.
 ERROR:root:Method get_methods() not found in module airtable_client.
+ERROR:root:Method get_methods() not found in module airtable_client.
+ERROR:root:Method get_methods() not found in module AirtableClient.
+ERROR:root:Method get_methods() not found in module AirtableClient.
+ERROR:root:Method get_methods() not found in module AirtableClient.
+ERROR:root:Method get_methods() not found in module AirtableClient.
+ERROR:root:Method get_methods() not found in module AirtableClient.
+ERROR:root:Method get_methods() not found in module AirtableClient.
+ERROR:root:Method get_methods() not found in module AirtableClient.
+ERROR:root:Error in _handle_gpt_function_calls: 'LLMSwitcher' object has no attribute 'AirtableClient'
+ERROR:root:Error in _handle_gpt_function_calls: 'LLMSwitcher' object has no attribute 'AirtableClient'
+ERROR:root:Error in _handle_gpt_function_calls: 'LLMSwitcher' object has no attribute 'AirtableClient'

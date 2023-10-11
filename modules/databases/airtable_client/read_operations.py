@@ -14,11 +14,10 @@ class Read:
         self.active_baseID = parent.active_baseID
         self.table_dictionary = parent.table_dictionary
 
-    @classmethod
-    def get_methods(cls):
+    def get_methods(self):
         """Return methods available in Read class."""
         try:
-            return get_methods(cls)
+            return get_methods(self)
         except Exception as e:
             logging.error(f"Error in get_methods: {e}")
             return {}

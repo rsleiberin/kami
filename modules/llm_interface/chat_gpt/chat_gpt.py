@@ -2,6 +2,7 @@ import openai
 import config
 import json
 import logging
+import re
 from modules.utils.utils import get_methods
 from modules.databases.airtable_client.airtable_client import AirtableClient
 from modules.llm_interface.state_tracker import FunctionState
@@ -61,13 +62,11 @@ class ChatGPT:
     def _get_gpt_response(self):
         """Get response from GPT-3 based on the current messages."""
         try:
-            print("Messages to GPT-3:", self.messages)  # Debug line
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages=self.messages,
                 functions=self.functions
             )
-            print("Raw GPT-3 response:", response)  # Debug line
             return self._response_handler(response)
         except openai.error.ServiceUnavailableError:
             self.messages.append({"role": "assistant", "content": "Server overload. Try again later."})
@@ -79,7 +78,6 @@ class ChatGPT:
     def _response_handler(self, response):
         if response:
             if 'function_call' in response.choices[0].message:
-                print("Detected function_call in GPT-3 response.")  # Debug line
                 function_call = response.choices[0].message['function_call']
                 return self._handle_gpt_function_calls(function_call)
             else:
@@ -90,7 +88,6 @@ class ChatGPT:
             print("Ask GPT2")
             return "I'm sorry, I couldn't process that request."
 
-
     def _handle_gpt_function_calls(self, function_call):
         """Handle potential function calls in GPT's response."""
         try:
@@ -98,24 +95,43 @@ class ChatGPT:
             code = arguments.get("code")
 
             if code:
-                # Print debugging information
                 print(f"Received code from GPT-3: {code}")
                 
-                # Split the code into class and method parts
-                class_part, method_part = code.rsplit(".", 1)
+                # Split the code into segments like ["AirtableClient(config.PERSONAL_ACCESS_TOKEN)", "Read", "get_records(\"tables\")"]
+                segments = re.findall(r"(\w+\(.*?\)|\w+)", code)
+                if not segments:
+                    return f"Invalid code format: {code}"
                 
-                # Use LLMSwitcher to execute the method
-                result = self.llm_switcher.execute_module_method(class_part, method_part)
-                
+                current_instance = None
+                for segment in segments:
+                    match = re.match(r"(\w+)\((.*?)\)", segment)
+                    if match:  # If the segment is a method or class with arguments
+                        method_name, args = match.groups()
+                        args_list = [arg.strip() for arg in args.split(',')]
+                        if not current_instance:  # For the initial method or class
+                            current_instance = getattr(self.llm_switcher, method_name)(*args_list)
+                        else:
+                            current_instance = getattr(current_instance, method_name)(*args_list)
+                    else:  # If the segment is a method or class without arguments
+                        if not current_instance:
+                            current_instance = getattr(self.llm_switcher, segment)() if callable(getattr(self.llm_switcher, segment)) else getattr(self.llm_switcher, segment)
+                        else:
+                            current_instance = getattr(current_instance, segment)() if callable(getattr(current_instance, segment)) else getattr(current_instance, segment)
+
+                # Final result after all chained calls
+                result = current_instance
+
                 # Print the result for debugging
                 print(f"Execution result: {result}")
                 return result
+
             else:
                 return "Command not provided."
 
         except Exception as e:
             logging.error(f"Error in _handle_gpt_function_calls: {e}")
             return "Error executing the command."
+
 
 
 

@@ -1,10 +1,11 @@
+from modules.databases.airtable_client.airtable_client import AirtableClient
 import sys
 import logging
 from modules.utils.utils import get_methods
 import config
+from modules.llm_interface.chat_gpt.chat_gpt import ChatGPT
 
 sys.path.append('/home/tank/kami')  # Use the actual path to the 'kami' directory
-from modules.databases.airtable_client.airtable_client import AirtableClient
 
 # Initialize logging
 logging.basicConfig(filename='llm_switcher.log', level=logging.DEBUG)
@@ -15,11 +16,15 @@ class LLMSwitcher:
     """
     def __init__(self):
         """Initialize the LLMSwitcher with registered modules."""
-        from modules.llm_interface.chat_gpt.chat_gpt import ChatGPT  # Local import to prevent circular dependencies
 
+        #load classes
         self.modules = {
-            "airtable_client": AirtableClient(config.AIRTABLE_PERSONAL_ACCESS_TOKEN)
+            "AirtableClient": AirtableClient(config.PERSONAL_ACCESS_TOKEN)
         }
+        #load sub-classes1
+        self.modules["AirtableClient.Read"] = self.modules["AirtableClient"].Read
+        #load sub-classes2...
+        
         self.gpt = ChatGPT(modules=self.modules, llm_switcher=self)  # Initialize ChatGPT with the modules
         self.modules["chat_gpt"] = self.gpt
 
@@ -31,26 +36,37 @@ class LLMSwitcher:
         """Register a module with the LLMSwitcher."""
         self.modules[module_name] = module_instance
 
-    def execute_module_method(self, module_name, method_name, *args, **kwargs):
-        # Fetch the module instance (not a submodule or class)
-        module_instance = self.modules.get(module_name)
-
-        if not module_instance:
-            error_msg = f"No module named {module_name} found."
-            logging.error(error_msg)
-            return error_msg
-
-        # Now, execute the method on the module instance.
-        method_to_call = getattr(module_instance, method_name, None)
-        if not method_to_call:
-            error_msg = f"Method {method_name} not found in module {module_name}."
-            logging.error(error_msg)
-            return error_msg
-
+    def execute_module_method(self, module_name, code, *args, **kwargs):
+        """Execute a method from a module dynamically."""
         try:
-            return method_to_call(*args, **kwargs)
+            # Break down the code into its components
+            components = code.split('.')
+            module_instance = self.modules.get(module_name)
+
+            if not module_instance:
+                error_msg = f"No module named {module_name} found."
+                logging.error(error_msg)
+                return error_msg
+
+            # Iteratively get the attributes and execute if they're callable
+            current_instance = module_instance
+            for component in components:
+                # Check if the component contains method with arguments
+                if "(" in component and ")" in component:
+                    method_name, method_args_str = component.split('(')
+                    method_args_str = method_args_str.rstrip(')')
+                    method_args = eval(f"[{method_args_str}]")  # This evaluates the arguments. Be cautious about this in production environments
+                    current_instance = getattr(current_instance, method_name)(*method_args)
+                else:
+                    current_instance = getattr(current_instance, component)
+
+            if callable(current_instance):
+                return current_instance(*args, **kwargs)
+            else:
+                return current_instance
+
         except Exception as e:
-            logging.error(f"Error executing method {method_name} in module {module_name}: {str(e)}")
+            logging.error(f"Error executing method {code} in module {module_name}: {str(e)}")
             return str(e)
 
 
@@ -127,12 +143,25 @@ class LLMSwitcher:
             return f"Error while using {method_name} from {module_name}: {str(e)}"
 
 if __name__ == "__main__":
-    switcher = LLMSwitcher()
-    response = switcher.execute_module_method("chat_gpt", "ask_gpt", "Tell me about airtable_client methods")
-    print(response)
-    airtable_module = switcher.modules["airtable_client"]
-    methods = airtable_module.get_methods()
-    print(methods)
+    # The print statements below were for debugging and can be commented out.
+    # print(sys.path)
+    chat = ChatGPT()
+    methods = chat.get_methods()
+    # print("\nMethods of AirtableClient:")
+    # print("airtable_methods: ", methods)
+    print(f"Processing methods: {methods}")
+    for method, details in methods.items():
+        print(f"Processing individual method: {method}")
+        # This print statement formats the output cleanly. You might want to keep it for clarity.
+        print(f"Method: {method}\nArgs: {details['args']}\nDoc: {details['doc']}\n")
+
+    # The following lines are commented out to reduce verbosity:
+    # gpt_response = chat.ask_gpt("Tell me about the methods of AirtableClient")
+    # print("Messages to GPT-3:", gpt_response)
+
+
+
+
 
 
 
