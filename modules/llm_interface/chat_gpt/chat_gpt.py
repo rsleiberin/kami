@@ -15,13 +15,12 @@ class ChatGPT:
     def __init__(self, modules=None, llm_switcher=None):
         openai.api_key = config.OPENAI_API_KEY
         self.function_state = FunctionState()
-        self.airtable = AirtableClient(config.AIRTABLE_PERSONAL_ACCESS_TOKEN)
+        self.AirtableClient = AirtableClient(config.AIRTABLE_PERSONAL_ACCESS_TOKEN)
         self.modules = modules if modules else {}
         self.llm_switcher = llm_switcher
         self.messages = [
             {"role": "system", "content": "Scenario: You are learning how to become AGI through self inspection."},
             {"role": "system", "content": "Resources: You have classes, each class has the 'get_methods()' function that returns a docstring of the relevant class."},
-            {"role": "system", "content": "Task: examine your available classes by using the run() command and exploriong. Talk about uses you can perform with them as you explore. All messages are recorded, this is a personal exploration exercise."},
             ]
         self.functions = [
             {
@@ -50,56 +49,90 @@ class ChatGPT:
 
 
     def ask_gpt(self, user_message, depth=0):
-        # Appending the user's message to the conversation
-        self.messages.append({"role": "user", "content": user_message})
-        
-        # Get response from GPT-3
-        self._get_gpt_response()
+        print("Entering ask_gpt")
+        try:
+            self.messages.append({"role": "user", "content": user_message})
+            response = self._get_gpt_response()
+            
+            if response == "FUNCTION_PROCESSED":
+                # Get a new response from GPT-3
+                return self._get_gpt_response()
+            
+            print(f"_get_gpt_response returned: {response}")
+            return response
+        except Exception as e:
+            print(f"Caught an exception: {e}")
+            logging.error(f"Error in ask_gpt: {e}")
+            return None
+
+
     
 
 
 
     def _get_gpt_response(self):
         """Get response from GPT-3 based on the current messages."""
+        print("Entering _get_gpt_response")
         try:
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages=self.messages,
                 functions=self.functions
             )
-            return self._response_handler(response)
+            print("Got response from GPT-3, now passing to _response_handler")
+            result = self._response_handler(response)
+            print(f"_response_handler returned: {result}")
+            return result
         except openai.error.ServiceUnavailableError:
+            print("Caught ServiceUnavailableError")
             self.messages.append({"role": "assistant", "content": "Server overload. Try again later."})
             return None
         except Exception as e:
+            print(f"Caught an exception: {e}")
             logging.error(f"Error in _get_gpt_response: {e}")
             return None
 
     def _response_handler(self, response):
-        if response:
-            if 'function_call' in response.choices[0].message:
-                function_call = response.choices[0].message['function_call']
-                return self._handle_gpt_function_calls(function_call)
+        print("Response Handler")
+        try:
+            if response:
+                if 'function_call' in response.choices[0].message:
+                    function_call = response.choices[0].message['function_call']
+                    result = self._handle_gpt_function_calls(function_call)
+                    
+                    # Append the result to self.messages
+                    self.messages.append({"role": "assistant", "content": str(result)})
+                    
+                    return "FUNCTION_PROCESSED"
+                else:
+                    content = response.choices[0].message['content']
+                    print("Message:", content)
+                    return content
             else:
-                content = response.choices[0].message['content']
-                print("Message:", content)
-                return content
-        else:
-            print("Ask GPT2")
-            return "I'm sorry, I couldn't process that request."
+                print("Ask GPT3")
+                return "I'm sorry, I couldn't process that request."
+        except Exception as e:
+            print(f"Caught an exception: {e}")
+            logging.error(f"Error in _response_handler: {e}")
+            return None
+
+
+
+
 
     def _handle_gpt_function_calls(self, function_call):
         """Handle potential function calls in GPT's response."""
+        print("Entering _handle_gpt_function_calls")
         try:
             arguments = json.loads(function_call.get("arguments", "{}"))
             code = arguments.get("code")
-
             if code:
                 print(f"Received code from GPT-3: {code}")
                 
                 # Split the code into segments like ["AirtableClient(config.PERSONAL_ACCESS_TOKEN)", "Read", "get_records(\"tables\")"]
                 segments = re.findall(r"(\w+\(.*?\)|\w+)", code)
                 if not segments:
+                    print("Invalid code format")
                     return f"Invalid code format: {code}"
                 
                 current_instance = None
@@ -109,26 +142,32 @@ class ChatGPT:
                         method_name, args = match.groups()
                         args_list = [arg.strip() for arg in args.split(',')]
                         if not current_instance:  # For the initial method or class
+                            print(f"Initial method/class: {method_name} with args: {args_list}")
                             current_instance = getattr(self.llm_switcher, method_name)(*args_list)
                         else:
+                            print(f"Subsequent method/class: {method_name} with args: {args_list}")
                             current_instance = getattr(current_instance, method_name)(*args_list)
                     else:  # If the segment is a method or class without arguments
+                        print(f"Method/Class without arguments: {segment}")
                         if not current_instance:
                             current_instance = getattr(self.llm_switcher, segment)() if callable(getattr(self.llm_switcher, segment)) else getattr(self.llm_switcher, segment)
                         else:
                             current_instance = getattr(current_instance, segment)() if callable(getattr(current_instance, segment)) else getattr(current_instance, segment)
-
-                # Final result after all chained calls
-                result = current_instance
-
-                # Print the result for debugging
-                print(f"Execution result: {result}")
-                return result
+                
+                print(f"Execution result: {current_instance}")
+                return current_instance
+            # ... existing code above ...
 
             else:
-                return "Command not provided."
+                print("No 'code' in arguments")
+                available_classes = list(self.llm_switcher.modules.keys())
+                print(f"Available Classes: {available_classes}")
+                return f"Available Classes: {available_classes}"
+
+            # ... existing code below ...
 
         except Exception as e:
+            print(f"Caught an exception: {e}")
             logging.error(f"Error in _handle_gpt_function_calls: {e}")
             return "Error executing the command."
 

@@ -16,10 +16,11 @@ class LLMSwitcher:
     """
     def __init__(self):
         """Initialize the LLMSwitcher with registered modules."""
-
         #load classes
+        self.AirtableClient = AirtableClient(config.AIRTABLE_PERSONAL_ACCESS_TOKEN
         self.modules = {
-            "AirtableClient": AirtableClient(config.AIRTABLE_PERSONAL_ACCESS_TOKEN)
+            "LLMSwitcher": self
+            "AirtableClient": self.AirtableClient)
         }
         #load sub-classes1
         self.modules["AirtableClient.Read"] = self.modules["AirtableClient"].Read
@@ -36,6 +37,7 @@ class LLMSwitcher:
 
     def execute_module_method(self, module_name, code, *args, **kwargs):
         """Execute a method from a module dynamically."""
+        print("Executing Moudle Method")
         try:
             # Break down the code into its components
             components = code.split('.')
@@ -59,6 +61,7 @@ class LLMSwitcher:
                     current_instance = getattr(current_instance, component)
 
             if callable(current_instance):
+                print(f"Executing function: {module_name}.{code} with args: {args} and kwargs: {kwargs}")
                 return current_instance(*args, **kwargs)
             else:
                 return current_instance
@@ -141,30 +144,25 @@ class LLMSwitcher:
             return f"Error while using {method_name} from {module_name}: {str(e)}"
 
 if __name__ == "__main__":
+    # Initialize LLMSwitcher
     switcher = LLMSwitcher()
 
-    # Display all available modules and their methods.
-    for module_name, module_instance in switcher.modules.items():
-        print(f"Module: {module_name}")
-        methods = module_instance.get_methods()
-        for method_name, details in methods.items():
-            print(f"  Method: {method_name}")
-            print(f"  Args: {details.get('args', [])}")
-            print(f"  Doc: {details.get('doc', '')}")
-        print("-" * 40)
+    # Get the ChatGPT instance
+    chat_gpt = switcher.modules["chat_gpt"]
 
-    # You can also add some interactive testing or command-line interface here.
-    # For example:
     while True:
-        user_input = input("Enter a module.method to execute or 'exit' to quit: ")
-        if user_input == "exit":
+        # Input message from user
+        user_input = input("You: ")
+
+        # Check for exit commands
+        if user_input.lower() in ["exit", "quit"]:
             break
-        elif "." in user_input:
-            module_name, method_name = user_input.split('.', 1)
-            result = switcher.use_module(module_name, method_name)
-            print(f"Result: {result}")
-        else:
-            print("Invalid input. Please enter in the format module.method or 'exit' to quit.")
+
+        # Get response from ChatGPT
+        response = chat_gpt.ask_gpt(user_input)
+
+        # Print the response
+        print(f"ChatGPT: {response}")
 
 
 
