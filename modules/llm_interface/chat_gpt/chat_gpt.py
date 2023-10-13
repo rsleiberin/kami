@@ -5,7 +5,7 @@ import logging
 import re
 from modules.utils.utils import get_methods
 from modules.databases.airtable_client.airtable_client import AirtableClient
-from modules.llm_interface.state_tracker import FunctionState
+from modules.llm_interface.function_state import FunctionState
 from datetime import datetime
 
 # Initialize logging

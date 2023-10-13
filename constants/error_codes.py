@@ -67,4 +67,21 @@ ERROR_CODES = {
         'message': "Method not found in module.",
         'http_status': 404,
     },
+    # FunctionState Errors
+    'FS001': {
+        'message': 'Error initializing FunctionState',
+        'http_status': 500,
+    },
+    'FS002': {
+    'message': 'Error setting the function state in FunctionState.set',
+    'http_status': 500,
+    },
+    'FS003': {
+    'message': 'Error checking function repetition in FunctionState.check_repetition',
+    'http_status': 500,
+    },
+    'FS004': {
+    'message': 'Error fetching methods in FunctionState.get_methods',
+    'http_status': 500,
+    },
 }
