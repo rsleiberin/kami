@@ -278,6 +278,12 @@ class LLMSwitcher:
             # Retrieve the method from the module instance
             method = getattr(module_instance, method_name)
 
+            # Check if the method is callable
+            if not callable(method):
+                error_msg = f"{method_name} is not a callable method in module {module_name}."
+                logging.error(error_msg)
+                return error_msg
+
             # Execute and return the method's output
             return method(*args, **kwargs)
 

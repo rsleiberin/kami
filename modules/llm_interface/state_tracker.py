@@ -1,10 +1,13 @@
 import logging
+from datetime import datetime
 from modules.utils.utils import get_methods
 
 class FunctionState:
     """
     Maintains a state to track the last function that was invoked 
     and its arguments to avoid repetitive function calls.
+    ---
+    Debug Tag: DT.5-FunctionState
     """
     
     def __init__(self):
@@ -15,11 +18,12 @@ class FunctionState:
     def set(self, function_name, arguments):
         """
         Set the state with the provided function name and arguments.
-
-        Parameters:
-        - function_name (str): Name of the function.
-        - arguments (dict): Arguments passed to the function.
+        ---
+        Debug Tag: DT.5.1-FunctionState-set
         """
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        print(f"DT.5.1-FunctionState-set | Time: {timestamp}")
+
         self.last_function = function_name
         self.last_arguments = arguments
 
@@ -27,20 +31,27 @@ class FunctionState:
         """
         Check if the provided function name and arguments are the same 
         as the last invocation.
-
-        Parameters:
-        - function_name (str): Name of the function.
-        - arguments (dict): Arguments passed to the function.
-
-        Returns:
-        bool: True if it's a repeated call, False otherwise.
+        ---
+        Debug Tag: DT.5.2-FunctionState-check_repetition
         """
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        print(f"DT.5.2-FunctionState-check_repetition | Time: {timestamp}")
+
         return self.last_function == function_name and self.last_arguments == arguments
 
     @staticmethod
     def get_methods():
-        """Return all the methods available in the FunctionState class."""
+        """
+        Return all the methods available in the FunctionState class.
+        ---
+        Debug Tag: DT.5.3-FunctionState-get_methods
+        """
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        print(f"DT.5.3-FunctionState-get_methods | Time: {timestamp}")
+        
         try:
             return get_methods(FunctionState)
         except Exception as e:
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            print(f"DT.5.3-Exception in FunctionState-get_methods | Time: {timestamp}")
             logging.error(str(e))
