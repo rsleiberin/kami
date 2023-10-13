@@ -57,3 +57,29 @@ ERROR:root:Error in _handle_gpt_function_calls: get_methods() takes 1 positional
 ERROR:root:Error in _handle_gpt_function_calls: 'LLMSwitcher' object has no attribute 'AtableClient'
 ERROR:root:Error in _handle_gpt_function_calls: 'LLMSwitcher' object has no attribute 'AtableClient'
 ERROR:root:Error in _handle_gpt_function_calls: 'LLMSwitcher' object has no attribute 'functions'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Module NonexistentModule not registered.
+ERROR:root:Method nonexistent_method not found in module Dummy.
+ERROR:root:non_callable is not a callable method in module Dummy.
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Error in load_module_class: ModuleNotFoundError - No module named 'nonexistent_module'
+ERROR:root:Error in load_module_class: AttributeError - module 'datetime' has no attribute 'NonexistentClass'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'AirtableClient' object has no attribute 'Read'
+ERROR:root:Module NonexistentModule not registered.
+ERROR:root:Method nonexistent_method not found in module Dummy.
+ERROR:root:non_callable is not a callable method in module Dummy.

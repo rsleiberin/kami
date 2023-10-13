@@ -1,4 +1,5 @@
 from modules.databases.airtable_client.airtable_client import AirtableClient
+from modules.utils.error_handler import handle_error  # Make sure to import handle_error
 import sys
 import logging
 from modules.utils.utils import get_methods
@@ -40,12 +41,8 @@ class LLMSwitcher:
             self.modules["chat_gpt"] = ChatGPT(modules=self.modules, llm_switcher=self)
 
         except Exception as e:
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            print(f"DT.1-Exception in LLMSwitcher-Initialization | Time: {timestamp}")
-            logging.error(f"Error in LLMSwitcher __init__: {e}")
-
- 
-
+            error_message, http_status = handle_error('LLM001')
+            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
 
     def get_methods(self):
         """
@@ -60,9 +57,8 @@ class LLMSwitcher:
         try:
             return get_methods(self)
         except Exception as e:
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            print(f"DT.2-Exception in LLMSwitcher-get_methods | Time: {timestamp}")
-            logging.error(f"Error in LLMSwitcher get_methods: {e}")
+            error_message, http_status = handle_error('LLM002')
+            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
             return {}
 
 
@@ -80,9 +76,9 @@ class LLMSwitcher:
             self.modules[module_name] = module_instance
             print(f"DT.3-Module {module_name} successfully registered | Time: {timestamp}")
         except Exception as e:
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            print(f"DT.3-Exception in LLMSwitcher-register_module | Time: {timestamp}")
-            logging.error(f"Error in LLMSwitcher register_module: {e}")
+            error_message, http_status = handle_error('LLM003')
+            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
+
 
     def execute_module_method(self, module_name, code, *args, **kwargs):
         """
@@ -106,9 +102,9 @@ class LLMSwitcher:
             module_instance = self.modules.get(module_name)
 
             if not module_instance:
-                error_msg = f"No module named {module_name} found."
-                logging.error(error_msg)
-                return error_msg
+                error_message, http_status = handle_error('LLM004')
+                logging.error(f"{error_message} | HTTP Status: {http_status}")
+                return error_message
 
             current_instance = module_instance
             for component in components:
@@ -127,10 +123,12 @@ class LLMSwitcher:
                 return current_instance
 
         except Exception as e:
+            error_message, http_status = handle_error('LLM005')
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             print(f"DT.4-Exception in LLMSwitcher-execute_module_method | Time: {timestamp}")
-            logging.error(f"Error executing method {code} in module {module_name}: {str(e)}")
+            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
             return str(e)
+
 
 
     def get_registered_module_methods(self, module_name):
@@ -151,17 +149,19 @@ class LLMSwitcher:
             # Actual functionality
             module = self.modules.get(module_name)
             if not module:
-                error_msg = f"No module named {module_name} found."
-                logging.error(error_msg)
-                return error_msg
+                error_message, http_status = handle_error('LLM004')
+                logging.error(f"{error_message} | HTTP Status: {http_status}")
+                return error_message
 
             return get_methods(module)
 
         except Exception as e:
+            error_message, http_status = handle_error('LLM006')
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             print(f"DT.5-Exception in LLMSwitcher-get_registered_module_methods | Time: {timestamp}")
-            logging.error(f"Error fetching methods for module {module_name}: {str(e)}")
-            return str(e)
+            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
+            return error_message
+
 
     def get_model_for_task(self, task_name):
         """
@@ -180,13 +180,19 @@ class LLMSwitcher:
 
             # Actual functionality
             if task_name in ["chat", "generate_text"]:
-                return self.gpt
+                if hasattr(self, 'gpt'):
+                    return self.gpt
+                else:
+                    error_message, http_status = handle_error('LLM007')  # Replace 'XXX' with the appropriate error code
+                    logging.error(f"{error_message} | HTTP Status: {http_status}")
+                    return None
             return None
 
         except Exception as e:
+            error_message, http_status = handle_error('GEN001')
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             print(f"DT.6-Exception in LLMSwitcher-get_model_for_task | Time: {timestamp}")
-            logging.error(f"Error determining model for task {task_name}: {str(e)}")
+            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
             return None
 
     def perform_task(self, task_name, *args, **kwargs):
@@ -210,15 +216,21 @@ class LLMSwitcher:
 
             # Execute the task if a suitable model is found
             if model:
-                return model.perform(task_name, *args, **kwargs)
-
-            # Handle the case where no suitable model is found
-            return "No suitable model found for the task."
+                if hasattr(model, 'perform'):
+                    return model.perform(task_name, *args, **kwargs)
+                else:
+                    error_msg = f"The model object does not have a 'perform' method."
+                    logging.error(error_msg)
+                    return error_msg
+            else:
+                error_msg = "No suitable model found for the task."
+                logging.error(error_msg)
+                return error_msg
 
         except Exception as e:
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             print(f"DT.7-Exception in LLMSwitcher-perform_task | Time: {timestamp}")
-            logging.error(f"Error executing task {task_name}: {str(e)}")
+            logging.error(f"Error executing task {task_name}: {type(e).__name__} - {str(e)}")
             return f"Error executing task: {str(e)}"
 
     def load_module_class(self, full_class_string):
@@ -242,16 +254,27 @@ class LLMSwitcher:
             # Import the module dynamically
             module = importlib.import_module(module_name)
 
-            # Retrieve the class object from the module
-            _class = getattr(module, class_name)
+            # Check if the module was successfully imported
+            if module:
+                # Retrieve the class object from the module
+                _class = getattr(module, class_name)
 
-            # Return the class object
-            return _class
+                # Check if the class object was successfully retrieved
+                if _class:
+                    return _class
+                else:
+                    error_msg = f"Class '{class_name}' not found in module '{module_name}'."
+                    logging.error(error_msg)
+                    return None
+            else:
+                error_msg = f"Failed to import module '{module_name}'."
+                logging.error(error_msg)
+                return None
 
         except Exception as e:
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             print(f"DT.8-Exception in LLMSwitcher-load_module_class | Time: {timestamp}")
-            logging.error(f"Error in load_module_class: {e}")
+            logging.error(f"Error in load_module_class: {type(e).__name__} - {str(e)}")
             return None
 
     def use_module(self, module_name, method_name, *args, **kwargs):
@@ -265,16 +288,16 @@ class LLMSwitcher:
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         print(f"DT.9-LLMSwitcher-use_module | Time: {timestamp}")
 
-        # Debugging information
-        print(f"DT.9-Using method {method_name} from module {module_name} | Time: {timestamp}")
-
-        module_instance = self.modules.get(module_name)
-        if not module_instance:
-            error_msg = f"Module {module_name} not registered."
-            logging.error(error_msg)
-            return error_msg
-
         try:
+            # Debugging information
+            print(f"DT.9-Using method {method_name} from module {module_name} | Time: {timestamp}")
+
+            module_instance = self.modules.get(module_name)
+            if not module_instance:
+                error_msg = f"Module {module_name} not registered."
+                logging.error(error_msg)
+                return error_msg
+
             # Retrieve the method from the module instance
             method = getattr(module_instance, method_name)
 
