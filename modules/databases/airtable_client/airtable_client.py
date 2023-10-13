@@ -71,5 +71,9 @@ class AirtableClient:
             return {}
 
 if __name__ == "__main__":
-    airtable = AirtableClient(config.AIRTABLE_PERSONAL_ACCESS_TOKEN)
-    print(airtable.get_methods())
+    # Replace with your actual configuration
+    your_config_here = config.AIRTABLE_PERSONAL_ACCESS_TOKEN
+    airtable_client_instance = AirtableClient(your_config_here)
+    result = airtable_client_instance.get_methods()
+    print(result)
+
