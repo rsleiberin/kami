@@ -3,6 +3,8 @@ import logging
 from pyairtable import Api
 from modules.utils.utils import get_methods
 from modules.databases.airtable_client.read_operations import Read
+from constants.static_table_dictionary import static_table_dictionary
+from modules.utils.error_handler import handle_error
 import config
 from datetime import datetime
 
@@ -12,25 +14,7 @@ sys.path.append('/home/tank/kami')
 # Initialize error logger
 logging.basicConfig(filename='airtable_error.log', level=logging.ERROR)
 
-# Define dictionary of tables
-static_table_dictionary = {
-    'AgentMessages': 'tblHwP2S9wrLSXZ8X',
-    'Tables': 'tbl1e2TVk2Gsl67h0',
-    'Keywords': 'tblIuO0o4RXt3XuOM',
-    'Roles': 'tblzW4VZbCWanIIyN',
-    'UserMessages': 'tblgb0zcBcICKsBuL',
-    'Sockets': 'tblIx8uynrcs0U1oY',
-    'Contexts': 'tblnM5iAC07MKkBE5',
-    'AuditLogs': 'tblBPD6bMP4OKXsvv',
-    'Changes': 'tblgPFTxtKkknnfP7',
-    'Responses': 'tblLzPyyqqHA5LX37',
-    'ResponseKeywords': 'tblEHTG1qWWGjhWUd',
-    'Models': 'tblnS11drSEKpG1fF',
-    'AgentSockets': 'tblecadjyehlqBwEk',
-    'Agents': 'tbl9aWKqXf4pBZgYo',
-    'Sessions': 'tbl0rofsENuhTICPT',
-    'Users': 'tblpn8f66jTilogu1'
-}
+
 
 class AirtableClient:
     def __init__(self, api_key):
@@ -40,10 +24,10 @@ class AirtableClient:
         Args:
             api_key (str): The API key for Airtable.
         ---
-        Debug Tag: DT.2-AirtableClient-Initialization
+        Debug Tag: DT.6.0-AirtableClient-__init__
         """
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"DT.2-AirtableClient-Initialization | Time: {timestamp}")
+        print(f"DT.6.0-AirtableClient-__init__ | Time: {timestamp}")
 
         try:
             self.api = Api(api_key)
@@ -52,7 +36,8 @@ class AirtableClient:
             self.table_dictionary = static_table_dictionary
             self.Read = self.initialize_read()
         except Exception as e:
-            logging.error(f"Error initializing AirtableClient: {e}")
+            error_message, http_status = handle_error('AIR002')
+            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
             raise
 
     def initialize_read(self):
@@ -62,15 +47,16 @@ class AirtableClient:
         Returns:
             Read: An instance of the Read class.
         ---
-        Debug Tag: DT.2.1-AirtableClient-InitializeRead
+        Debug Tag: DT.6.1-AirtableClient-InitializeRead
         """
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"DT.2.1-AirtableClient-InitializeRead | Time: {timestamp}")
+        print(f"DT.6.1-AirtableClient-InitializeRead | Time: {timestamp}")
 
         try:
             return Read(self)
         except Exception as e:
-            logging.error(f"Error initializing Read class: {e}")
+            error_message, http_status = handle_error('AIR003')
+            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
             raise
 
     def get_methods(self):

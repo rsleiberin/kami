@@ -10,6 +10,11 @@ ERROR_CODES = {
         'message': 'Invalid request',
         'http_status': 400,
     },
+    #Test Errors
+    'TEST001': {
+        'message': 'Test failed during execution.',
+        'http_status': 400,
+    },
     # Airtable Client Errors
     'AIR001': {
         'message': 'Failed to fetch data from Airtable',
@@ -19,6 +24,15 @@ ERROR_CODES = {
         'message': 'Invalid Airtable configuration',
         'http_status': 400,
     },
+    'AIR003': {
+        'message': 'Error initializing Read class',
+        'http_status': 500,
+    },
+    'AIR004': {
+        'message': 'Error fetching methods for AirtableClient',
+        'http_status': 500,
+    },
+
     # LLMSwitcher Errors
     'LLM001': {
         'message': 'Failed to initialize LLMSwitcher',
