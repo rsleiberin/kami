@@ -4,6 +4,7 @@ from pyairtable import Api
 from modules.utils.utils import get_methods
 from modules.databases.airtable_client.read_operations import Read
 import config
+from datetime import datetime
 
 # Adding system path
 sys.path.append('/home/tank/kami')
@@ -38,7 +39,12 @@ class AirtableClient:
 
         Args:
             api_key (str): The API key for Airtable.
+        ---
+        Debug Tag: DT.2-AirtableClient-Initialization
         """
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        print(f"DT.2-AirtableClient-Initialization | Time: {timestamp}")
+
         try:
             self.api = Api(api_key)
             self.base_dictionary = {'Kami': config.AIRTABLE_BASE_ID}
@@ -55,7 +61,12 @@ class AirtableClient:
 
         Returns:
             Read: An instance of the Read class.
+        ---
+        Debug Tag: DT.2.1-AirtableClient-InitializeRead
         """
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        print(f"DT.2.1-AirtableClient-InitializeRead | Time: {timestamp}")
+
         try:
             return Read(self)
         except Exception as e:
@@ -63,7 +74,13 @@ class AirtableClient:
             raise
 
     def get_methods(self):
-        """Return methods available in AirtableClient."""
+        """Return methods available in AirtableClient.
+        ---
+        Debug Tag: DT.2.2-AirtableClient-GetMethods
+        """
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        print(f"DT.2.2-AirtableClient-GetMethods | Time: {timestamp}")
+
         try:
             return get_methods(self)
         except Exception as e:
@@ -71,9 +88,19 @@ class AirtableClient:
             return {}
 
 if __name__ == "__main__":
-    # Replace with your actual configuration
-    your_config_here = config.AIRTABLE_PERSONAL_ACCESS_TOKEN
-    airtable_client_instance = AirtableClient(your_config_here)
-    result = airtable_client_instance.get_methods()
-    print(result)
+    """
+    Debug Tag: DT.2.3-AirtableClient-MainExecution
+    """
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print(f"DT.2.3-AirtableClient-MainExecution | Time: {timestamp}")
+
+    try:
+        # Replace with your actual configuration
+        your_config_here = config.AIRTABLE_PERSONAL_ACCESS_TOKEN
+        airtable_client_instance = AirtableClient(your_config_here)
+        result = airtable_client_instance.get_methods()
+        print(result)
+    except Exception as e:
+        logging.error(f"Error in main execution for AirtableClient: {e}")
+
 

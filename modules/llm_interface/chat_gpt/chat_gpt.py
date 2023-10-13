@@ -13,10 +13,14 @@ logging.basicConfig(filename='chat_gpt_error.log', level=logging.ERROR)
 
 
 class ChatGPT:
-    def __init__(self, modules=None, llm_switcher=None):
-        """Initializes the ChatGPT class."""
+    def __init__(self, llm_switcher):
+        """
+        Initializes the ChatGPT class.
+        ---
+        Debug Tag: DT.2-ChatGPT-Initialization
+        """
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"DT.3-Initializing ChatGPT | Time: {timestamp}")
+        print(f"DT.2-ChatGPT-Initialization | Time: {timestamp}")
         try:
             print(f"DT.3.1-Setting API Key | Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
             openai.api_key = config.OPENAI_API_KEY

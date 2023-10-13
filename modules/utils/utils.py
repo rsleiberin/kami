@@ -1,11 +1,19 @@
 import inspect
 import logging
+from datetime import datetime
 
 # Initialize the logging for error handling
 logging.basicConfig(filename='utils_error.log', level=logging.ERROR)
 
 def get_methods(obj):
-    """Return methods and nested classes with their methods."""
+    """
+    Retrieve all callable methods of an object.
+    ---
+    Debug Tag: DT.3.1-Utils-get_methods
+    """
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print(f"DT.3.1-Utils-get_methods | Time: {timestamp}")
+    
     try:
         methods = {}
         
