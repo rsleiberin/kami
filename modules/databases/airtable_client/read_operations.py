@@ -107,26 +107,28 @@ class Read:
             logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
             return None
 
-    def test_get_records_with_filter(self):
+    def get_records_with_filter(self, table_name, filter_expression):
         """
-        Test if get_records_with_filter in Read class returns records that match the filter expression from a specified table.
+        Fetches records from the specified table that match a given filter expression.
+        ---
+        Debug Tag: DT.4.5-Read-get_records_with_filter
         """
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        print(f"DT.4.5-Read-get_records_with_filter | Time: {timestamp}")
+
         try:
-            # Arrange
-            read_instance = self.airtable_client.Read(self.airtable_client)  # Assuming you can access Read like this.
-            test_table_name = 'YourTestTableName'  # Replace with a table name for testing
-            test_filter_expression = 'YourTestFilterExpression'  # Replace with a filter expression for testing
-            
-            # Act
-            records = read_instance.get_records_with_filter(test_table_name, test_filter_expression)
-            
-            # Assert
-            self.assertIsInstance(records, list)  # Make sure it returns a list
-            # Further assertions based on what you expect in the records list can be added.
-            
+            table_id = self.table_dictionary.get(table_name)
+            if not table_id:
+                raise ValueError(f"Invalid table name: {table_name}")
+            table = self.api.table(self.active_baseID, table_id)
+            records = table.search(filter=filter_expression)
+            return records
         except Exception as e:
-            error_message, http_status = handle_error('TEST_READ_GET_RECORDS_WITH_FILTER_001')
-            self.fail(f"{error_message} | HTTP Status: {http_status} | Exception: {str(e)}")
+            error_message, http_status = handle_error('READ006')
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            print(f"DT.4.5-Exception in Read-get_records_with_filter | Time: {timestamp}")
+            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
+            return []
     
     def get_records_sorted(self, table_name, sort_field, ascending=True):
         """
