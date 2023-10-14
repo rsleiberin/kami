@@ -183,7 +183,7 @@ class LLMSwitcher:
                 if hasattr(self, 'gpt'):
                     return self.gpt
                 else:
-                    error_message, http_status = handle_error('LLM007')  # Replace 'XXX' with the appropriate error code
+                    error_message, http_status = handle_error('LLM007') 
                     logging.error(f"{error_message} | HTTP Status: {http_status}")
                     return None
             return None
@@ -198,8 +198,6 @@ class LLMSwitcher:
     def perform_task(self, task_name, *args, **kwargs):
         """
         Perform a task using the best-suited Large Language Model (LLM).
-        This function will use get_model_for_task to determine the best-suited model and then
-        call the model's perform method with the provided arguments and keyword arguments.
         ---
         Debug Tag: DT.7-LLMSwitcher-perform_task
         Debug Focus Log Tag: Executing task
@@ -219,24 +217,25 @@ class LLMSwitcher:
                 if hasattr(model, 'perform'):
                     return model.perform(task_name, *args, **kwargs)
                 else:
-                    error_msg = f"The model object does not have a 'perform' method."
-                    logging.error(error_msg)
-                    return error_msg
+                    error_message, http_status = handle_error('LLM008')
+                    logging.error(f"{error_message} | HTTP Status: {http_status}")
+                    return error_message
             else:
-                error_msg = "No suitable model found for the task."
-                logging.error(error_msg)
-                return error_msg
+                error_message, http_status = handle_error('LLM009')
+                logging.error(f"{error_message} | HTTP Status: {http_status}")
+                return error_message
 
         except Exception as e:
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             print(f"DT.7-Exception in LLMSwitcher-perform_task | Time: {timestamp}")
-            logging.error(f"Error executing task {task_name}: {type(e).__name__} - {str(e)}")
-            return f"Error executing task: {str(e)}"
+            error_message, http_status = handle_error('GEN001')
+            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
+            return str(e)
+
 
     def load_module_class(self, full_class_string):
         """
         Dynamically load a class from a string representation.
-        This function takes the fully qualified name of the class and returns the loaded class object.
         ---
         Debug Tag: DT.8-LLMSwitcher-load_module_class
         Debug Focus Log Tag: Loading module class
@@ -257,30 +256,31 @@ class LLMSwitcher:
             # Check if the module was successfully imported
             if module:
                 # Retrieve the class object from the module
-                _class = getattr(module, class_name)
+                _class = getattr(module, class_name, None)
 
                 # Check if the class object was successfully retrieved
                 if _class:
                     return _class
                 else:
-                    error_msg = f"Class '{class_name}' not found in module '{module_name}'."
-                    logging.error(error_msg)
+                    error_message, http_status = handle_error('LLM010')
+                    logging.error(f"{error_message} | HTTP Status: {http_status}")
                     return None
             else:
-                error_msg = f"Failed to import module '{module_name}'."
-                logging.error(error_msg)
+                error_message, http_status = handle_error('LLM011')
+                logging.error(f"{error_message} | HTTP Status: {http_status}")
                 return None
 
         except Exception as e:
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             print(f"DT.8-Exception in LLMSwitcher-load_module_class | Time: {timestamp}")
-            logging.error(f"Error in load_module_class: {type(e).__name__} - {str(e)}")
+            error_message, http_status = handle_error('GEN001')
+            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
             return None
+
 
     def use_module(self, module_name, method_name, *args, **kwargs):
         """
         Use a specific method from a registered module.
-        This function dynamically calls a method from a registered module, passing in provided arguments and keyword arguments.
         ---
         Debug Tag: DT.9-LLMSwitcher-use_module
         Debug Focus Log Tag: Using module method
@@ -294,32 +294,34 @@ class LLMSwitcher:
 
             module_instance = self.modules.get(module_name)
             if not module_instance:
-                error_msg = f"Module {module_name} not registered."
-                logging.error(error_msg)
-                return error_msg
+                error_message, http_status = handle_error('LLM012')
+                logging.error(f"{error_message} | HTTP Status: {http_status}")
+                return error_message
 
             # Retrieve the method from the module instance
-            method = getattr(module_instance, method_name)
+            method = getattr(module_instance, method_name, None)
 
             # Check if the method is callable
             if not callable(method):
-                error_msg = f"{method_name} is not a callable method in module {module_name}."
-                logging.error(error_msg)
-                return error_msg
+                error_message, http_status = handle_error('LLM013')
+                logging.error(f"{error_message} | HTTP Status: {http_status}")
+                return error_message
 
             # Execute and return the method's output
             return method(*args, **kwargs)
 
         except AttributeError:
-            error_msg = f"Method {method_name} not found in module {module_name}."
-            logging.error(error_msg)
-            return error_msg
+            error_message, http_status = handle_error('LLM014')
+            logging.error(f"{error_message} | HTTP Status: {http_status}")
+            return error_message
 
         except Exception as e:
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             print(f"DT.9-Exception in LLMSwitcher-use_module | Time: {timestamp}")
-            logging.error(f"Error using method {method_name} from module {module_name}: {str(e)}")
-            return f"Error while using {method_name} from {module_name}: {str(e)}"
+            error_message, http_status = handle_error('GEN001')
+            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
+            return error_message
+
 
 if __name__ == "__main__":
     """

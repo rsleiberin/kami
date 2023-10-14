@@ -32,7 +32,92 @@ ERROR_CODES = {
         'message': 'Error fetching methods for AirtableClient',
         'http_status': 500,
     },
-
+    #AirtableClient Read Operations Errors
+    'READ001': {
+        'message': 'Failed to initialize the Read class.',
+        'http_status': 500  # Internal Server Error
+    },
+    'READ002': {
+        'message': 'Failed to retrieve methods in Read class.',
+        'http_status': 500  # Internal Server Error
+    },
+    'READ003': {
+        'message': 'Failed to fetch tables in Read class.',
+        'http_status': 500  # Internal Server Error
+    },
+    'READ004': {
+        'message': 'Failed to fetch records in Read class.',
+        'http_status': 500  # Internal Server Error
+    },
+    'READ005': {
+        'message': 'Failed to fetch a record by its ID in Read class.',
+        'http_status': 500  # Internal Server Error
+    },
+    'READ006': {
+        'message': 'Failed to fetch records with a given filter in Read class.',
+        'http_status': 500  # Internal Server Error
+    },
+    'READ007': {
+        'message': 'Failed to fetch sorted records in Read class.',
+        'http_status': 500  # Internal Server Error
+    },
+    'READ009': {
+        'message': 'Failed to fetch records by date range in Read class.',
+        'http_status': 500  # Internal Server Error
+    },
+    'READ010': {
+        'message': 'Failed to fetch records with specified fields in Read class.',
+        'http_status': 500  # Internal Server Error
+    },
+    'READ011': {
+        'message': 'Failed to search records in Read class.',
+        'http_status': 500  # Internal Server Error
+    },
+    #Airtable Read Operations Errors
+    'TEST_READ_INIT_001': {
+        'message': 'Failed to initialize Read class in test environment',
+        'http_status': 500,
+    },
+    'TEST_READ_GET_METHODS_001': {
+        'message': 'Failed to test get_methods in Read class',
+        'http_status': 500,
+    },
+    'TEST_READ_GET_TABLES_001': {
+        'message': 'Failed to test get_tables in Read class',
+        'http_status': 500,
+    },
+    'TEST_READ_GET_RECORDS_001': {
+        'message': 'Failed to test get_records in Read class',
+        'http_status': 500,
+    },
+    'TEST_READ_GET_RECORD_BY_ID_001': {
+        'message': 'Failed to test get_record_by_id in Read class',
+        'http_status': 500,
+    },
+    'TEST_READ_GET_RECORDS_WITH_FILTER_001': {
+        'message': 'Failed to test get_records_with_filter in Read class',
+        'http_status': 500,
+    },
+    'TEST_READ_GET_RECORDS_SORTED_001': {
+        'message': 'Failed to test get_records_sorted in Read class',
+        'http_status': 500,
+    },
+    'TEST_READ_GET_RECORDS_PAGINATED_001': {
+        'message': 'Failed to test get_records_paginated in Read class',
+        'http_status': 500,
+    },
+        'TEST_READ_GET_RECORDS_BY_DATE_RANGE_001': {
+        'message': 'Failed to test get_records_by_date_range in Read class',
+        'http_status': 500,
+    },
+    'TEST_READ_GET_RECORDS_WITH_FIELDS_001': {
+        'message': 'Failed to test get_records_with_fields in Read class',
+        'http_status': 500,
+    },
+    'TEST_READ_SEARCH_RECORDS_001': {
+        'message': 'Failed to test search_records in Read class',
+        'http_status': 500,
+    },
     # LLMSwitcher Errors
     'LLM001': {
         'message': 'Failed to initialize LLMSwitcher',
