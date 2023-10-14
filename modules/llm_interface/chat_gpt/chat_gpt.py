@@ -13,7 +13,7 @@ logging.basicConfig(filename='chat_gpt_error.log', level=logging.ERROR)
 
 
 class ChatGPT:
-    def __init__(self, llm_switcher):
+    def __init__(self, llm_switcher, modules=None):
         """
         Initializes the ChatGPT class.
         ---

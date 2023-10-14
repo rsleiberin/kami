@@ -97,3 +97,11 @@ ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: 'Air
 ERROR:root:Module not registered. | HTTP Status: 404
 ERROR:root:Method not callable in module. | HTTP Status: 400
 ERROR:root:Method not callable in module. | HTTP Status: 400
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: __init__() got an unexpected keyword argument 'modules'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: __init__() got an unexpected keyword argument 'modules'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: __init__() got an unexpected keyword argument 'modules'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: __init__() got an unexpected keyword argument 'modules'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: __init__() got an unexpected keyword argument 'modules'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: __init__() got an unexpected keyword argument 'modules'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: __init__() got an unexpected keyword argument 'modules'
+ERROR:root:Failed to initialize LLMSwitcher | HTTP Status: 500 | Exception: __init__() got an unexpected keyword argument 'modules'

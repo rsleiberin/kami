@@ -80,56 +80,6 @@ class LLMSwitcher:
             logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
 
 
-    def execute_module_method(self, module_name, code, *args, **kwargs):
-        """
-        Execute a method from a registered module dynamically.
-        This function allows you to call a method in a module by its name and pass arguments to it.
-        ---
-        Debug Tag: DT.4-LLMSwitcher-execute_module_method
-        Debug Focus Log Tag: Executing method from module
-        """
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"DT.4-LLMSwitcher-execute_module_method | Time: {timestamp}")
-        
-        try:
-            # Debugging information
-            print(f"DT.4-Executing Module Method {module_name}.{code} | Time: {timestamp}")
-            print(f"DT.4-Executed Args: {args} | Time: {timestamp}")
-            print(f"DT.4-Executed Kwargs: {kwargs} | Time: {timestamp}")
-
-            # Actual functionality
-            components = code.split('.')
-            module_instance = self.modules.get(module_name)
-
-            if not module_instance:
-                error_message, http_status = handle_error('LLM004')
-                logging.error(f"{error_message} | HTTP Status: {http_status}")
-                return error_message
-
-            current_instance = module_instance
-            for component in components:
-                if "(" in component and ")" in component:
-                    method_name, method_args_str = component.split('(')
-                    method_args_str = method_args_str.rstrip(')')
-                    method_args = eval(f"[{method_args_str}]")
-                    current_instance = getattr(current_instance, method_name)(*method_args)
-                else:
-                    current_instance = getattr(current_instance, component)
-
-            if callable(current_instance):
-                print(f"DT.4-Executing function: {module_name}.{code} with args: {args} and kwargs: {kwargs} | Time: {timestamp}")
-                return current_instance(*args, **kwargs)
-            else:
-                return current_instance
-
-        except Exception as e:
-            error_message, http_status = handle_error('LLM005')
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            print(f"DT.4-Exception in LLMSwitcher-execute_module_method | Time: {timestamp}")
-            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
-            return str(e)
-
-
 
     def get_registered_module_methods(self, module_name):
         """
@@ -334,34 +284,13 @@ if __name__ == "__main__":
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     print(f"DT.10-main | Time: {timestamp}")
 
-    try:
-        # Initialize LLMSwitcher
-        print(f"DT.10-Initializing LLMSwitcher | Time: {timestamp}")
-        switcher = LLMSwitcher()
+    # Initialize LLMSwitcher
+    print(f"DT.10-Initializing LLMSwitcher | Time: {timestamp}")
+    switcher = LLMSwitcher()
 
-        # Get the ChatGPT instance
-        print(f"DT.10-Getting ChatGPT instance | Time: {timestamp}")
-        chat_gpt = switcher.modules["chat_gpt"]
+    #Get LLMSwitcher methods
+    print (switcher.get_methods())
 
-        while True:
-            # Input message from user
-            user_input = input("You: ")
-
-            # Check for exit commands
-            if user_input.lower() in ["exit", "quit"]:
-                break
-
-            # Get response from ChatGPT
-            print(f"DT.10-Getting response from ChatGPT | Time: {timestamp}")
-            response = chat_gpt.ask_gpt(user_input)
-
-            # Print the response
-            print(f"ChatGPT: {response}")
-
-    except Exception as e:
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"DT.10-Exception in main | Time: {timestamp}")
-        logging.error(f"Error in main: {str(e)}")
 
 
 
