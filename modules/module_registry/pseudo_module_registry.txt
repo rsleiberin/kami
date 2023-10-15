@@ -1,0 +1,35 @@
+# MODULE REGISTRY PSEUDOCODE
+
+# Current Task:
+# - Refactor and streamline the ModuleRegistry to align with the primary goals of the Kami project.
+# - Ensure each function in the ModuleRegistry serves a distinct and necessary role.
+# - The LLM should be able to dynamically execute methods from connected modules while ensuring security and authorization.
+
+# If lost, refer to:
+# - Recent discussions about the purpose and functionality of each method in the ModuleRegistry.
+# - The goals and intentions behind the Kami project.
+# - Keywords: LLM, autonomy, execute methods, connected modules, dynamic execution, LLM switching, module management.
+
+# Primary Goals of ModuleRegistry:
+# 1. Module Management:
+#    - Register and manage modules.
+#    - Whitelist modules ensuring only authorized ones can be accessed by the LLM.
+# 2. Dynamic Execution:
+#    - Allow the LLM to dynamically execute methods from connected modules.
+# 3. LLM Switching:
+#    - Transition between different LLMs based on the task or context.
+
+# Methods:
+# 1. execute_module_method: Dynamically run methods from connected modules.
+# 2. get_methods: Fetch doc strings of methods for understanding or documentation.
+# 3. register_module: Essential for importing and whitelisting modules.
+
+# Methods to Reassess:
+# - get_model_for_task: Determine which LLM model to use.
+# - get_registered_module_methods: Fetch methods from a registered module.
+# - load_module_class: Purpose unclear. Possibly for dynamic module loading.
+# - perform_task: Functionality unclear.
+# - use_module: Possibly for utilizing a specific method from a registered module.
+
+# Note:
+# Always consider the context limitations of the LLM. Focus on clarifying the purpose of each method, removing redundancies, and ensuring distinct roles.

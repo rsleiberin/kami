@@ -1,0 +1,9 @@
+
+- Class: AirtableClient
+  - Method: __init__
+    - Initialize connection to Airtable.
+    - Set up any necessary headers or authentication details.
+    
+  - Method: read_operations
+    - Fetch data from Airtable.
+    - Handle pagination or any limits set by Airtable.

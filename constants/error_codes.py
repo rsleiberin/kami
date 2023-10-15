@@ -126,17 +126,6 @@ ERROR_CODES = {
     'LLM002': {
         'message': 'Error in LLMSwitcher get_methods',
         'http_status': 500,
-    },'LLM004': {
-        'message': 'Module not found in LLMSwitcher',
-        'http_status': 400,
-    },
-    'LLM005': {
-        'message': 'Error executing method in LLMSwitcher',
-        'http_status': 500,
-    },
-    'LLM006': {
-        'message': 'Error fetching methods for module in LLMSwitcher',
-        'http_status': 400,
     },'LLM007': {
         'message': "Attribute 'gpt' has not been initialized in LLMSwitcher.",
         'http_status': 500,
@@ -147,24 +136,6 @@ ERROR_CODES = {
     'LLM009': {
         'message': "No suitable model found for the task.",
         'http_status': 500,
-    },'LLM010': {
-        'message': "Class not found in the module.",
-        'http_status': 500,
-    },
-    'LLM011': {
-        'message': "Failed to import module.",
-        'http_status': 500,
-    },'LLM012': {
-        'message': "Module not registered.",
-        'http_status': 404,
-    },
-    'LLM013': {
-        'message': "Method not callable in module.",
-        'http_status': 400,
-    },
-    'LLM014': {
-        'message': "Method not found in module.",
-        'http_status': 404,
     },
     # FunctionState Errors
     'FS001': {
@@ -182,5 +153,83 @@ ERROR_CODES = {
     'FS004': {
     'message': 'Error fetching methods in FunctionState.get_methods',
     'http_status': 500,
+    },
+    # Error codes for ContextManager
+    'CONTEXT001': {
+        'message': 'Failed to initialize ContextManager.',
+        'http_status': 500
+    },
+    'CONTEXT002': {
+        'message': 'Failed to retrieve current context.',
+        'http_status': 500
+    },
+    'CONTEXT003': {
+        'message': 'Failed to set new context.',
+        'http_status': 500
+    },
+    #Module Registry error codes
+    'MR001': {
+        'message': 'Failed to initialize ModuleRegistry',
+        'http_status': 500,
+    },
+    'MR004': {
+        'message': 'Module not found in ModuleRegistry',
+        'http_status': 400,
+    },
+    'MR005': {
+        'message': 'Error executing method in ModuleRegistry',
+        'http_status': 500,
+    },
+    'MR006': {
+        'message': 'Error in ModuleRegistry get_methods',
+        'http_status': 500,
+    },
+    'MR007': {
+        'message': "Attribute 'gpt' has not been initialized in ModuleRegistry",
+        'http_status': 500,
+    },
+    'MR008': {
+        'message': 'Error executing get_model_for_task in ModuleRegistry',
+        'http_status': 500,
+    },
+    'MR009': {
+        'message': 'Error executing get_registered_module_methods in ModuleRegistry',
+        'http_status': 500,
+    },
+    'MR010': {
+        'message': "The requested module '{}' does not exist in the ModuleRegistry",
+        'http_status': 500,
+    },
+    'MR011': {
+        'message': 'Error executing get_registered_module_methods in ModuleRegistry',
+        'http_status': 500,
+    },
+    'MR012': {
+        'message': "Error loading the module class from string '{}'",
+        'http_status': 500,
+    },
+    'MR013': {
+        'message': "The model '{}' does not have a 'perform' method",
+        'http_status': 400,
+    },
+    'MR014': {
+        'message': "No suitable model found for task '{}'",
+        'http_status': 404,
+    },   
+    'MR015': {
+        'message': 'Error in ModuleRegistry register_module',
+        'http_status': 500,
+    },
+    'MR016': {
+        'message': 'Module instance not found in ModuleRegistry during use_module',
+        'http_status': 400,
+    },
+    'MR017': {
+        'message': 'Method not callable in ModuleRegistry during use_module',
+        'http_status': 400,
+    },
+    'MR018': {
+        'message': 'AttributeError during use_module in ModuleRegistry',
+        'http_status': 500,
     },
 }

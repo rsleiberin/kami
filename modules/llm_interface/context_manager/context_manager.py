@@ -21,8 +21,6 @@ class ContextManager:
             error_message, http_status = handle_error('CTXMGR001')  # You will need to define this error code
             logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
             raise  # Re-raise the exception to ensure it gets caught higher up
-
-
     def get_context(self):
         """
         Retrieve current context.
