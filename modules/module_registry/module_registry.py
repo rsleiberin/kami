@@ -1,300 +1,257 @@
-from datetime import datetime
-import logging
-from modules.utils.error_handler import handle_error
-from modules.utils.utils import get_methods
-from modules.databases.airtable_client.airtable_client import AirtableClient
-import config
-from importlib import import_module
+import inspect
+from utils.utils import print_tracer, handle_error, get_methods, add_error_codes
 
-# Set up logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s]: %(message)s')
+MODULE_REGISTRY_ERROR_CODES = {
+    "MR001": {
+        'message': 'Module already registered.',
+        'http_status': 409,  # Conflict
+        'severity': 'ERROR',
+        'description': 'The module being registered is already present in the module registry.',
+        'resolution': 'Ensure the module is not already added or use a unique name for registration.',
+    },
+    "MR002": {
+        'message': 'Module not found in registry.',
+        'http_status': 404,  # Not Found
+        'severity': 'ERROR',
+        'description': 'The module being removed is not present in the module registry.',
+        'resolution': 'Ensure the module name is correct and has been registered.',
+    },
+    "MR003": {
+        'message': 'Module not found in registry.',
+        'http_status': 404,  # Not Found
+        'severity': 'ERROR',
+        'description': 'Attempted to execute a method from a module that is not registered.',
+        'resolution': 'Ensure the module is registered before executing methods from it.',
+    },
+    "MR004": {
+        'message': 'Method not found in the specified module.',
+        'http_status': 404,  # Not Found
+        'severity': 'ERROR',
+        'description': 'Attempted to execute a method that does not exist in the specified module.',
+        'resolution': 'Check the method name and ensure it exists in the module.',
+    },
+    "MR005": {
+        'message': 'Error while executing the method.',
+        'http_status': 500,  # Internal Server Error
+        'severity': 'ERROR',
+        'description': 'An unexpected error occurred while executing the method from the module.',
+        'resolution': 'Check the arguments and method implementation for potential issues.',
+    },
+    "MR006": {
+        'message': 'Failed to fetch registered modules.',
+        'http_status': 500,  # Internal Server Error
+        'severity': 'ERROR',
+        'description': 'An unexpected error occurred while fetching the list of registered modules.',
+        'resolution': 'Check the module registry implementation and storage.',
+    },
+    "MR007": {
+        'message': 'Module not found in registry.',
+        'http_status': 404,  # Not Found
+        'severity': 'ERROR',
+        'description': 'The module whose methods are being fetched is not present in the module registry.',
+        'resolution': 'Ensure the module name is correct and has been registered.',
+    },
+    "MR008": {
+        'message': 'Unable to fetch methods for the module.',
+        'http_status': 500,  # Internal Server Error
+        'severity': 'ERROR',
+        'description': 'An unexpected error occurred while trying to fetch methods for a registered module.',
+        'resolution': 'Ensure the module and its methods are correctly implemented.',
+    },
+    "MR009": {
+        'message': 'Module already exists in the registry.',
+        'http_status': 409,  # Conflict
+        'severity': 'ERROR',
+        'description': 'The module being registered is already present in the module registry.',
+        'resolution': 'Ensure the module is not already added or use a unique name for registration.',
+    },
+    "MR010": {
+        'message': 'Error while registering module.',
+        'http_status': 500,  # Internal Server Error
+        'severity': 'ERROR',
+        'description': 'An unexpected error occurred while trying to register a module.',
+        'resolution': 'Check the module implementation and ensure it is compatible with the registry.',
+    }
+}
+
+add_error_codes(MODULE_REGISTRY_ERROR_CODES)
 
 class ModuleRegistry:
     def __init__(self):
+        self.modules = {}  # Dictionary to store registered modules
+        print_tracer("ModuleRegistry", "__init__", "Initialization", "ModuleRegistry initialized.")
+
+
+
+    def remove_module(self, module_name: str) -> bool:
         """
-        Initialize the ModuleRegistry with registered modules.
-        ---
-        Debug Tag: DT.1-ModuleRegistry-Initialization
+        Remove a module from the registry.
+        Args:
+        - module_name (str): Name of the module to be removed.
+
+        Returns:
+        - bool: True if the module was successfully removed, False otherwise.
         """
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"DT.1-ModuleRegistry-Initialization | Time: {timestamp}")
+        print_tracer("ModuleRegistry", "remove_module", "Start", f"Attempting to remove {module_name}.")
+        
+        # Check if module exists in the registry
+        if module_name not in self.modules:
+            error_details = MODULE_REGISTRY_ERROR_CODES["MR002"]
+            print_tracer("ModuleRegistry", "remove_module", "Error", error_details['message'])
+            return False
+        
+        # Remove module from the registry
+        del self.modules[module_name]
+        print_tracer("ModuleRegistry", "remove_module", "End", f"{module_name} successfully removed.")
+        return True
+
+
+    def execute_module_method(self, module_name: str, method_name: str, *args, **kwargs):
+        """
+        Execute a method from a registered module.
+        Args:
+        - module_name (str): Name of the module.
+        - method_name (str): Name of the method to be executed.
+        - *args, **kwargs: Arguments to pass to the method.
+
+        Returns:
+        - Result of the executed method or None if an error occurs.
+        """
+        print_tracer("ModuleRegistry", "execute_module_method", "Start")
+
+        module_instance = self.modules.get(module_name)
+        if not module_instance:
+            error_details = MODULE_REGISTRY_ERROR_CODES["MR003"]
+            print_tracer("ModuleRegistry", "execute_module_method", "Error", error_details['message'])
+            return error_details
 
         try:
-            # Initialize AirtableClient
-            self.AirtableClient = AirtableClient(config.AIRTABLE_PERSONAL_ACCESS_TOKEN)
-            
-            # Initialize modules dictionary
-            self.modules = {
-                "ModuleRegistry": self,
-                "AirtableClient": self.AirtableClient
-            }
-            
-            print(f"DT.1-ModuleRegistry successfully initialized | Time: {timestamp}")
-
+            method = getattr(module_instance, method_name)
+            result = method(*args, **kwargs)
+            print_tracer("ModuleRegistry", "execute_module_method", "End", f"{method_name} executed successfully.")
+            return result
+        except AttributeError:
+            error_details = MODULE_REGISTRY_ERROR_CODES["MR004"]
+            print_tracer("ModuleRegistry", "execute_module_method", "Error", error_details['message'])
+            return error_details
         except Exception as e:
-            error_message, http_status = handle_error('MR001')
-            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
+            error_details = MODULE_REGISTRY_ERROR_CODES["MR005"]
+            print_tracer("ModuleRegistry", "execute_module_method", "Error", f"{error_details['message']}. Exception: {str(e)}")
+            return error_details
 
-    def execute_module_method(self, module_name, code, *args, **kwargs):
+    def get_registered_modules(self):
         """
-        Execute a method from a registered module dynamically.
-        This function allows you to call a method in a module by its name and pass arguments to it.
-        ---
-        Debug Tag: DT.4-ModuleRegistry-execute_module_method
-        Debug Focus Log Tag: Executing method from module
+        Fetch the list of registered modules.
+        Returns:
+        - List of registered module names.
         """
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"DT.4-ModuleRegistry-execute_module_method | Time: {timestamp}")
+        print_tracer("ModuleRegistry", "get_registered_modules", "Start")
         
         try:
-            # Debugging information
-            print(f"DT.4-Executing Module Method {module_name}.{code} | Time: {timestamp}")
-            print(f"DT.4-Executed Args: {args} | Time: {timestamp}")
-            print(f"DT.4-Executed Kwargs: {kwargs} | Time: {timestamp}")
-
-            # Actual functionality
-            components = code.split('.')
-            module_instance = self.modules.get(module_name)  # Changed to self.module_dict
-
-            if not module_instance:
-                error_message, http_status = handle_error('MR004')  # Error codes should also be updated
-                logging.error(f"{error_message} | HTTP Status: {http_status}")
-                return error_message
-
-            current_instance = module_instance
-            for component in components:
-                if "(" in component and ")" in component:
-                    method_name, method_args_str = component.split('(')
-                    method_args_str = method_args_str.rstrip(')')
-                    method_args = eval(f"[{method_args_str}]")
-                    current_instance = getattr(current_instance, method_name)(*method_args)
-                else:
-                    current_instance = getattr(current_instance, component)
-
-            if callable(current_instance):
-                print(f"DT.4-Executing function: {module_name}.{code} with args: {args} and kwargs: {kwargs} | Time: {timestamp}")
-                return current_instance(*args, **kwargs)
-            else:
-                return current_instance
-
+            module_list = list(self.modules.keys())
+            print_tracer("ModuleRegistry", "get_registered_modules", "End")
+            return module_list
         except Exception as e:
-            error_message, http_status = handle_error('MR005')  # Error codes should also be updated
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            print(f"DT.4-Exception in ModuleRegistry-execute_module_method | Time: {timestamp}")
-            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
-            return str(e)
-    
-    def get_methods(self):
-        """
-        Get methods and their docstrings for the Module Registery class.
-        This function provides an overview of the methods available in the Module Registery class.
-        ---
-        Debug Tag: DT.4-ModuleRegistry-get_methods
-        """
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"DT.4-ModuleRegistry-get_methods | Time: {timestamp}")
+            error_details = MODULE_REGISTRY_ERROR_CODES["MR006"]
+            print_tracer("ModuleRegistry", "get_registered_modules", "Error", f"{error_details['message']}. Exception: {str(e)}")
+            return error_details
 
-        try:
-            return get_methods(self)
-        except Exception as e:
-            error_message, http_status = handle_error('MR006')
-            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
-            return {}
-    
-    def get_model_for_task(self, task_name):
+    def get_module_methods(self, module_name: str):
         """
-        Determine the best Large Language Model (LLM) for a given task.
-        This function is responsible for deciding which model to use based on the task name provided.
-        ---
-        Debug Tag: DT.6-ModuleRegistry-get_model_for_task
-        Debug Focus Log Tag: Fetching model for task
+        Fetch the methods of a specific registered module.
+        Args:
+        - module_name (str): Name of the module.
+
+        Returns:
+        - List of method names from the module or None if module not found.
         """
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"DT.6-ModuleRegistry-get_model_for_task | Time: {timestamp}")
-
-        try:
-            # Debugging information
-            print(f"DT.6-Fetching model for task: {task_name} | Time: {timestamp}")
-
-            # Actual functionality
-            if task_name in ["chat", "generate_text"]:
-                if 'gpt' in self.modules:
-                    return self.modules['gpt']
-                else:
-                    error_message, http_status = handle_error('MR007')  # Updated error code
-                    logging.error(f"{error_message} | HTTP Status: {http_status}")
-                    return None
+        print_tracer("ModuleRegistry", "get_module_methods", "Start", f"Fetching methods for {module_name}.")
+        
+        module_instance = self.modules.get(module_name)
+        if not module_instance:
+            error_details = handle_error("MR004")  # Assuming MR004 corresponds to "Module not found in registry"
+            print_tracer("ModuleRegistry", "get_module_methods", "Error", error_details['message'])
             return None
 
-        except Exception as e:
-            error_message, http_status = handle_error('MR008')  # Updated error code
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            print(f"DT.6-Exception in ModuleRegistry-get_model_for_task | Time: {timestamp}")
-            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
-            return str(e)
+        methods = get_methods(module_instance)
+        if not methods:
+            error_details = handle_error("MR005")  # Assuming MR005 corresponds to "Unable to fetch methods for the module"
+            print_tracer("ModuleRegistry", "get_module_methods", "Error", error_details['message'])
+            return None
+
+        print_tracer("ModuleRegistry", "get_module_methods", "End", f"Methods fetched for {module_name}.")
+        return methods
+    
+    def register_module(self, module_name: str, module_instance):
+        """
+        Register a new module into the ModuleRegistry.
         
-    def get_registered_module_methods(self, module_name):
+        Args:
+        - module_name (str): Name of the module.
+        - module_instance: Instance of the module to be registered.
+
+        Returns:
+        - dict: A dictionary containing status (success/error), message, and any additional data.
         """
-        Return the methods of a registered module.
-        This function queries the list of methods available in a given module.
-        ---
-        Debug Tag: DT.5-ModuleRegistry-get_registered_module_methods
-        Debug Focus Log Tag: Fetching registered module methods
-        """
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"DT.5-ModuleRegistry-get_registered_module_methods | Time: {timestamp}")
+        print_tracer("ModuleRegistry", "register_module", "Start")
 
-        try:
-            # Debugging information
-            print(f"DT.5-Fetching registered module methods for {module_name} | Time: {timestamp}")
-
-            # Actual functionality
-            module = self.modules.get(module_name)
-            if not module:
-                error_message, http_status = handle_error('MR010')  # Update error code accordingly
-                logging.error(f"{error_message} | HTTP Status: {http_status}")
-                return error_message
-
-            return get_methods(module)
-
-        except Exception as e:
-            error_message, http_status = handle_error('MR011')  # Update error code accordingly
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            print(f"DT.5-Exception in ModuleRegistry-get_registered_module_methods | Time: {timestamp}")
-            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
-            return error_message
-    
-    def load_module_class(self, full_class_string):
-        """
-        Dynamically load a class from a string representation.
-        ---
-        Debug Tag: DT.8-ModuleRegistry-load_module_class
-        Debug Focus Log Tag: Loading module class
-        """
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"DT.8-ModuleRegistry-load_module_class | Time: {timestamp}")
-
-        try:
-            # Debugging information
-            print(f"DT.8-Loading module class: {full_class_string} | Time: {timestamp}")
-
-            # Actual functionality
-            module_path, class_name = full_class_string.rsplit('.', 1)
-            module = import_module(module_path)
-            return getattr(module, class_name)
-
-        except Exception as e:
-            error_message, http_status = handle_error('MR007')  # Update error code accordingly
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            print(f"DT.8-Exception in ModuleRegistry-load_module_class | Time: {timestamp}")
-            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
-            return error_message
-    
-    def perform_task(self, task_name, *args, **kwargs):
-        """
-        Perform a task using the best-suited Large Language Model (LLM).
-        ---
-        Debug Tag: DT.7-LLMSwitcher-perform_task
-        Debug Focus Log Tag: Executing task
-        """
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"DT.7-LLMSwitcher-perform_task | Time: {timestamp}")
-
-        try:
-            # Debugging information
-            print(f"DT.7-Executing task: {task_name} | Time: {timestamp}")
-
-            # Determine the best-suited LLM for the given task
-            model = self.get_model_for_task(task_name)
-
-            # Execute the task if a suitable model is found
-            if model:
-                if hasattr(model, 'perform'):
-                    return model.perform(task_name, *args, **kwargs)
-                else:
-                    error_message, http_status = handle_error('MR013')  # Updated error code
-                    logging.error(f"{error_message} | HTTP Status: {http_status}")
-                    return error_message
-            else:
-                error_message, http_status = handle_error('MR014')  # Updated error code
-                logging.error(f"{error_message} | HTTP Status: {http_status}")
-                return error_message
-
-        except Exception as e:
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            print(f"DT.7-Exception in LLMSwitcher-perform_task | Time: {timestamp}")
-            error_message, http_status = handle_error('GEN001')
-            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
-            return str(e)
-    
-    def register_module(self, module_name, module_instance, module_context={}):
-        """
-        Register a module with the ModuleRegistry.
-        This function adds a new module to the ModuleRegistry's list of registered modules.
-        Also attaches any relevant context data to the module.
-        ---
-        Debug Tag: DT.4-ModuleRegistry-register_module
-        Debug Focus Log Tag: Registering module
-        """
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"DT.4-ModuleRegistry-register_module | Time: {timestamp}")
-        
-        try:
-            # Storing module instance and context in a dictionary
-            self.modules[module_name] = {
-                "instance": module_instance,
-                "context": module_context
+        if module_name in self.modules:
+            print_tracer("ModuleRegistry", "register_module", "Error", f"Module {module_name} already exists in the registry.")
+            return {
+                'status': 'error',
+                'message': f"Module {module_name} already exists in the registry."
             }
-            print(f"DT.4-Module {module_name} successfully registered | Time: {timestamp}")
-        except Exception as e:
-            error_message, http_status = handle_error('MR015')  # Error code updated for ModuleRegistry
-            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
-    
-    def use_module(self, module_name, method_name, *args, **kwargs):
-        """
-        Use a specific method from a registered module.
-        ---
-        Debug Tag: DT.5-ModuleRegistry-use_module
-        Debug Focus Log Tag: Using module method
-        """
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"DT.5-ModuleRegistry-use_module | Time: {timestamp}")
 
         try:
-            # Debugging information
-            print(f"DT.5-Using method {method_name} from module {module_name} | Time: {timestamp}")
-
-            module_instance = self.modules.get(module_name)
-            if not module_instance:
-                error_message, http_status = handle_error('MR016')  # Error code updated for ModuleRegistry
-                logging.error(f"{error_message} | HTTP Status: {http_status}")
-                return error_message
-
-            # Retrieve the method from the module instance
-            method = getattr(module_instance, method_name, None)
-
-            # Check if the method is callable
-            if not callable(method):
-                error_message, http_status = handle_error('MR017')  # Error code updated for ModuleRegistry
-                logging.error(f"{error_message} | HTTP Status: {http_status}")
-                return error_message
-
-            # Execute and return the method's output
-            return method(*args, **kwargs)
-
-        except AttributeError:
-            error_message, http_status = handle_error('MR018')  # Error code updated for ModuleRegistry
-            logging.error(f"{error_message} | HTTP Status: {http_status}")
-            return error_message
-
+            self.modules[module_name] = module_instance
+            print_tracer("ModuleRegistry", "register_module", "End", f"Module {module_name} registered successfully.")
+            return {
+                'status': 'success',
+                'message': f"Module {module_name} registered successfully."
+            }
         except Exception as e:
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            print(f"DT.5-Exception in ModuleRegistry-use_module | Time: {timestamp}")
-            error_message, http_status = handle_error('GEN001')
-            logging.error(f"{error_message} | HTTP Status: {http_status} | Exception: {e}")
-            return error_message
-    
-if __name__ == "__main__":
+            error_details = handle_error("MR004")  # Assuming MR003 corresponds to "Error while registering module"
+            print_tracer("ModuleRegistry", "register_module", "Error", f"{error_details['message']}. Exception: {str(e)}")
+            return {
+                'status': 'error',
+                'message': error_details['message'],
+                'exception': str(e)
+            }
+    def register_module(self, module_name: str, module_instance):
+        """
+        Register a new module into the ModuleRegistry.
+        
+        Args:
+        - module_name (str): Name of the module.
+        - module_instance: Instance of the module to be registered.
+
+        Returns:
+        - dict: A dictionary containing status (success/error), message, and any additional data.
+        """
+        print_tracer("ModuleRegistry", "register_module", "Start")
+
+        if module_name in self.modules:
+            print_tracer("ModuleRegistry", "register_module", "Error", f"Module {module_name} already exists in the registry.")
+            return {
+                'status': 'error',
+                'message': f"Module {module_name} already exists in the registry."
+            }
+
+        try:
+            self.modules[module_name] = module_instance
+            print_tracer("ModuleRegistry", "register_module", "End", f"Module {module_name} registered successfully.")
+            return {
+                'status': 'success',
+                'message': f"Module {module_name} registered successfully."
+            }
+        except Exception as e:
+            error_details = handle_error("MR004")
+            print_tracer("ModuleRegistry", "register_module", "Error", f"{error_details['message']}. Exception: {str(e)}")
+            return {
+                'status': 'error',
+                'message': error_details['message'],
+                'exception': str(e)
+            }
+if __name__=="__main__":
     instance = ModuleRegistry()
-    print(instance)
-    print(instance.get_methods())
+    get_methods(instance)

@@ -1,8 +1,0 @@
-
-- Class: ContextManager
-  - Method: __init__
-    - Set up initial context state.
-
-  - Method: update_context
-    - Update the current context based on new information.
-    - Store context in a structured manner.

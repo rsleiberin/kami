@@ -1,9 +1,0 @@
-
-- Class: ChatGPTInterface
-  - Method: __init__
-    - Initialize connection to the ChatGPT API.
-    - Load any necessary configurations.
-
-  - Method: send_request
-    - Send user input to ChatGPT.
-    - Receive and process response.

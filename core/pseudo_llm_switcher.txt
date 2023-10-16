@@ -1,0 +1,32 @@
+Class LLMSwitcher:
+
+    Initialize:
+        Establish a connection to the ModuleRegistry
+        Load the initial/default LLM
+
+    Method switch_to_module(module_name):
+        - Switch to a different LLM.
+        - If module_name is not registered in the ModuleRegistry:
+            Return an error message indicating the module is not found
+        Else:
+            Unload the current LLM (if any)
+            Load the desired module_name as the current LLM
+            Return a success message indicating the switch was successful
+
+    Method execute_current_module_method(method_name, *args, **kwargs):
+        - Execute a method from the currently loaded LLM.
+        - If no LLM is loaded:
+            Return an error message indicating no LLM is loaded
+        Else:
+            Execute the method_name of the loaded LLM with given args and kwargs
+            Return the result of the method execution
+
+    Method get_current_module_methods():
+        - Fetch the methods of the currently loaded LLM.
+        - If no LLM is loaded:
+            Return an error message indicating no LLM is loaded
+        Else:
+            Use the get_methods utility function to get a list of methods of the loaded LLM
+            Return the list of methods
+
+End of Class

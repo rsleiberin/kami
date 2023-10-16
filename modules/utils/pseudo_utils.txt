@@ -1,5 +1,0 @@
-
-- Functions/Methods:
-  - error_handler: Process and log any errors.
-  - get_methods: Inspect and fetch methods for the specified class.
-  ...

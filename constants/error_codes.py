@@ -1,5 +1,24 @@
 # error_codes.py
-
+#pre-production refactor for future-proofing
+ERROR_CODES = {
+    'GEN001': {
+        'message': 'A general error occurred.',
+        'http_status': 500,
+        'severity': 'ERROR',
+        'description': 'This is a catch-all error for unexpected issues.',
+        'resolution': 'Check the detailed error message and traceback.',
+    },
+    'MR001': {
+        'message': 'ModuleRegistry initialization failed.',
+        'http_status': 500,
+        'severity': 'CRITICAL',
+        'description': 'An error occurred during the initialization of the ModuleRegistry.',
+        'resolution': 'Ensure all dependencies are correctly installed and configurations are correct.',
+    },
+    # ... add more error codes as needed
+}
+#pre-standardization version
+'''
 ERROR_CODES = {
     # General Errors
     'GEN001': {
@@ -233,3 +252,4 @@ ERROR_CODES = {
         'http_status': 500,
     },
 }
+'''

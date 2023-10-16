@@ -1,35 +1,42 @@
-# MODULE REGISTRY PSEUDOCODE
+Class ModuleRegistry:
 
-# Current Task:
-# - Refactor and streamline the ModuleRegistry to align with the primary goals of the Kami project.
-# - Ensure each function in the ModuleRegistry serves a distinct and necessary role.
-# - The LLM should be able to dynamically execute methods from connected modules while ensuring security and authorization.
+    Initialize:
+        Create an empty dictionary for modules
 
-# If lost, refer to:
-# - Recent discussions about the purpose and functionality of each method in the ModuleRegistry.
-# - The goals and intentions behind the Kami project.
-# - Keywords: LLM, autonomy, execute methods, connected modules, dynamic execution, LLM switching, module management.
+    Method register_module(module_name, module_instance):
+        If module_name is already in modules:
+            Return an error message indicating the module is already registered
+        Else:
+            Add the module_instance to the modules dictionary with the key as module_name
+            Return a success message indicating the module was registered
 
-# Primary Goals of ModuleRegistry:
-# 1. Module Management:
-#    - Register and manage modules.
-#    - Whitelist modules ensuring only authorized ones can be accessed by the LLM.
-# 2. Dynamic Execution:
-#    - Allow the LLM to dynamically execute methods from connected modules.
-# 3. LLM Switching:
-#    - Transition between different LLMs based on the task or context.
+    Method remove_module(module_name):
+        If module_name is not in modules:
+            Return an error message indicating the module is not found
+        Else:
+            Remove the module_name from the modules dictionary
+            Return a success message indicating the module was removed
 
-# Methods:
-# 1. execute_module_method: Dynamically run methods from connected modules.
-# 2. get_methods: Fetch doc strings of methods for understanding or documentation.
-# 3. register_module: Essential for importing and whitelisting modules.
+    Method get_registered_modules():
+        Return a list of all module names currently in the modules dictionary
 
-# Methods to Reassess:
-# - get_model_for_task: Determine which LLM model to use.
-# - get_registered_module_methods: Fetch methods from a registered module.
-# - load_module_class: Purpose unclear. Possibly for dynamic module loading.
-# - perform_task: Functionality unclear.
-# - use_module: Possibly for utilizing a specific method from a registered module.
+    Method execute_module_method(module_name, method_name, *args, **kwargs):
+        If module_name is not in modules:
+            Return an error message indicating the module is not found
+        Else:
+            Get the module_instance from the modules dictionary using module_name
+            If method_name is not a method of module_instance:
+                Return an error message indicating the method is not found
+            Else:
+                Execute the method_name of the module_instance with given args and kwargs
+                Return the result of the method execution
 
-# Note:
-# Always consider the context limitations of the LLM. Focus on clarifying the purpose of each method, removing redundancies, and ensuring distinct roles.
+    Method get_module_methods(module_name):
+        If module_name is not in modules:
+            Return an error message indicating the module is not found
+        Else:
+            Get the module_instance from the modules dictionary using module_name
+            Use the get_methods utility function to get a list of methods of the module_instance
+            Return the list of methods
+
+End of Class
