@@ -1,67 +1,69 @@
+EventDrivenSocket:
+
+The EventDrivenSocket handles the AGI's response to specific system events or triggers. It waits for events, processes them based on their type, and executes the relevant handler. 
+
 class EventDrivenSocket:
 
     def __init__(self):
         """
-        Initialize the EventDrivenSocket. This might involve setting up event listeners, 
-        loading event-handling configurations, etc.
+        Initialize the EventDrivenSocket. Set up event listeners, load event-handling 
+        configurations, and define handlers for specific event types.
         """
-        self.event_queue = []
+        self.event_queue = []  # Queue to store incoming events.
         self.handlers = {
             'missing_module_detected': self.handle_missing_module,
             'internal_improvement_detected': self.handle_internal_improvement,
-            # ... other event types and their handlers ...
+            # Other event types and their corresponding handlers can be added here.
         }
 
     def wait_for_event(self):
         """
-        Wait for an event to occur. This can be based on specific triggers, timers, 
-        or other conditions.
+        Continuously listen for events and add them to the event queue.
+        This method should be non-blocking and run asynchronously.
         """
-        # Implementation depends on how events are generated and captured.
-        pass
+        # Logic to capture and enqueue events.
 
     def identify_missing_module(self, event_details):
         """
-        Identify which module is missing based on the event details.
+        Extract and identify which module is missing based on the event details.
         """
-        # Extract relevant information from event_details to determine the missing module.
+        # Parse event_details to ascertain the missing module.
         return missing_module
 
     def handle_missing_module(self, event_details):
         """
-        Handle events where a module is detected as missing.
+        Address 'missing_module_detected' events by identifying and loading the missing module.
         """
         required_module = self.identify_missing_module(event_details)
-        # Load the required module or, if not available, request its creation or fetching.
         self.load_or_request_module(required_module)
 
     def get_improvement_details(self, event_details):
         """
-        Retrieve details of a potential internal improvement based on the event details.
+        Extract details of a potential internal improvement from the event details.
         """
-        # Extract relevant information from event_details to determine the improvement.
+        # Parse event_details to pinpoint the required improvement.
         return improvement_details
 
     def handle_internal_improvement(self, event_details):
         """
-        Handle events indicating potential internal improvements.
+        Address 'internal_improvement_detected' events by applying the identified improvement.
         """
         improvement_details = self.get_improvement_details(event_details)
-        # Apply the improvement to the system.
         self.apply_internal_improvement(improvement_details)
 
     def handle_event_generic(self, event):
         """
-        Handle generic events that don't match any specific type.
+        Default handler for events without a specific handler.
         """
-        # Generic event handling logic.
-        pass
+        # Generic event handling logic, perhaps logging or notifying about the unhandled event.
 
     def process_event_queue(self):
         """
-        Process events from the queue and handle them based on their type.
+        Continuously process and handle events from the queue.
         """
         while self.event_queue:
-            current_event = self.event_queue.pop(0)
+            current_event = self.event_queue.pop(0)  # Fetch the next event.
             handler = self.handlers.get(current_event.type, self.handle_event_generic)
             handler(current_event.details)
+
+    # Additional utility methods, like `load_or_request_module` and `apply_internal_improvement`, can be added for comprehensive event handling.

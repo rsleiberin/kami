@@ -30,4 +30,4 @@ class IterativeFeedbackSocket:
 # Execution Flow:
 
 feedback_socket = IterativeFeedbackSocket()
-final_code = feedback_socket.
+final_code = feedback_socket.loop_for_adjustments(initial_code, initial_feedback)

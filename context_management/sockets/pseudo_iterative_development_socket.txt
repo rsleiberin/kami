@@ -1,0 +1,8 @@
+IterativeDevelopmentSocket:
+
+Modifies the code based on the provided feedback, which can involve debugging, optimization, or other improvements.
+
+class IterativeDevelopmentSocket:
+    @staticmethod
+    def modify(code, feedback):
+        # Modify the code based on feedback.
