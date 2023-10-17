@@ -1,0 +1,49 @@
+class SocketManager:
+    def __init__(self):
+        """
+        Initialize the SocketManager with a list of available sockets.
+        """
+        self.available_sockets = {}
+        self.active_sockets = {}
+
+    def register_socket(self, socket_name, socket_instance):
+        """
+        Register a new socket to be available for activation.
+        """
+        self.available_sockets[socket_name] = socket_instance
+
+    def activate_socket(self, socket_name):
+        """
+        Activate a socket from the available sockets list.
+        """
+        if socket_name not in self.available_sockets:
+            return "Error: Socket {} not available.".format(socket_name)
+        
+        self.active_sockets[socket_name] = self.available_sockets[socket_name]
+        return "Success: Socket {} activated.".format(socket_name)
+
+    def deactivate_socket(self, socket_name):
+        """
+        Deactivate an active socket.
+        """
+        if socket_name not in self.active_sockets:
+            return "Error: Socket {} is not active.".format(socket_name)
+        
+        del self.active_sockets[socket_name]
+        return "Success: Socket {} deactivated.".format(socket_name)
+
+    def process_socket(self, socket_name, *args, **kwargs):
+        """
+        Process a specific socket and execute its functionalities.
+        """
+        if socket_name not in self.active_sockets:
+            return "Error: Socket {} is not active.".format(socket_name)
+
+        socket_instance = self.active_sockets[socket_name]
+        return socket_instance.execute(*args, **kwargs)
+
+    def get_active_sockets(self):
+        """
+        Retrieve a list of all active sockets.
+        """
+        return list(self.active_sockets.keys())
