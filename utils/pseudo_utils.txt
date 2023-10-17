@@ -1,3 +1,9 @@
+utils/pseudo_utils.txt
+
+This will be a textual representation of utility functions, standardizations, and tools.
+Provide methods for string manipulations, data validations, and other common operations
+Handle exceptions and errors related to utility operations
+
 Utility Method Standardization Guide:
 1. Import Section:
 Begin with the necessary import statements.

@@ -1,0 +1,23 @@
+WaitSocket:
+
+Responsible for holding the system in a waiting state until user input or an internal trigger is detected.
+
+class WaitSocket:
+
+    - Initialization:
+        Define attributes related to the system's waiting state and potential triggers.
+
+    - wait_for_input_or_trigger():
+        Keep the system in a waiting state, checking periodically for user input or internal triggers.
+
+    - check_for_user_input():
+        Periodically check if there's any new input from the user.
+
+    - check_for_internal_trigger():
+        Periodically check for internal system triggers or alerts.
+
+    - handle_user_input(input_data):
+        Process the detected user input and take the appropriate action.
+
+    - handle_internal_trigger(trigger_data):
+        Process the detected internal trigger and take the necessary actions.

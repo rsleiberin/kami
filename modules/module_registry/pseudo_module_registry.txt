@@ -1,3 +1,10 @@
+modules/module_registry/module_registry.py
+
+Define the ModuleRegistry class
+Maintain a registry of all available modules
+Provide methods to add, remove, and fetch modules
+Handle exceptions and errors related to module operations
+
 Class ModuleRegistry:
 
     Initialize:

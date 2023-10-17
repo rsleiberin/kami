@@ -1,0 +1,35 @@
+CodingSocket Class:
+
+- Attributes:
+  * code_context: A list that stores information related to the recent code executions and their outputs or errors.
+
+- Methods:
+
+  * __init__():
+    - Initialize the code_context as an empty list.
+
+  * execute_code(code_execution_data):
+    - Purpose: Execute the provided code data and store its context.
+    - Input: code_execution_data - Code snippets or data to be executed.
+    - Actions:
+      1. Call the run_code() method with code_execution_data as an argument.
+      2. Store the result in code_context.
+      3. Return the execution result.
+  
+  * run_code(code_data):
+    - Purpose: Utility method to run the provided code data.
+    - Input: code_data - Code snippets to be executed.
+    - Actions:
+      1. Try to execute the code using the exec() function.
+      2. If the execution is successful, return a dictionary with type as 'code_execution', the original data, and the output.
+      3. If there's an exception during execution, return a dictionary with type as 'code_execution', the original data, and an error message.
+
+  * get_recent_code_context():
+    - Purpose: Retrieve the recent code execution context.
+    - Actions:
+      1. Return the last 10 items from code_context.
+
+  * clear_code_context():
+    - Purpose: Clear the stored code execution context.
+    - Actions:
+      1. Empty the code_context list.

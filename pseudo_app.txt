@@ -1,0 +1,7 @@
+app.py
+
+Initialize the application
+Load configurations from config.py
+Initialize the LLMSwitcher from the core directory
+Define the main execution loop, listening for user inputs and commands
+Handle any exceptions and errors gracefully

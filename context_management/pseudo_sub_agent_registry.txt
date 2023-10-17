@@ -1,35 +1,29 @@
-SubAgentRegistry:
+SubAgentRegistry Pseudo-Code Enhancement:
+The SubAgentRegistry maintains a record of all active sub-agents within the AGI system. This registry provides methods to add, remove, pause, resume, and query the status of sub-agents.
 
-The SubAgentRegistry is responsible for tracking and managing all the sub-agents that the AGI system spawns for autonomous tasks. This registry provides methods to add, remove, and query the status of sub-agents.
+Initialization:
+Initialize an empty list to keep track of active sub-agents.
 
-class SubAgentRegistry:
+Registration:
+Add a new sub-agent instance to the active list. Ensure each sub-agent has a unique identifier.
 
-    def __init__(self):
-        # A list to keep track of all active sub-agents.
-        self.active_agents = []
+Deregistration:
+Remove a sub-agent instance from the active list based on its unique identifier.
 
-    def register(self, sub_agent):
-        """
-        Add a new sub-agent to the active list.
-        """
-        self.active_agents.append(sub_agent)
+Active Agents:
+Fetch and return a list of all currently active sub-agents.
 
-    def deregister(self, sub_agent):
-        """
-        Remove a sub-agent from the active list.
-        """
-        self.active_agents.remove(sub_agent)
+Agent Status:
+Query and return the status of a specific sub-agent using its unique identifier.
 
-    def get_active_agents(self):
-        """
-        Return a list of all active sub-agents.
-        """
-        return self.active_agents
+Pause Agent:
+Pause the operations of a specific sub-agent based on its unique identifier.
 
-    def get_agent_status(self, sub_agent):
-        """
-        Query the status of a specific sub-agent.
-        """
-        return sub_agent.get_status()
+Resume Agent:
+Resume the operations of a paused sub-agent based on its unique identifier.
 
-    # ... Additional methods for further sub-agent management and operations ...
+Terminate Agent:
+Forcefully stop the operations of a specific sub-agent and remove it from the active list.
+
+Error Handling:
+Implement mechanisms to handle potential issues, such as trying to deregister a non-existent sub-agent or querying the status of an agent not in the active list.

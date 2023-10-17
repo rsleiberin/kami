@@ -1,0 +1,5 @@
+config.py
+
+Define default settings for the application (e.g., debug mode, default module, etc.)
+Load environment-specific configurations if available
+Provide methods to fetch and update these configurations

@@ -1,9 +1,9 @@
-# Waiting for the next user input or internal trigger
-
 class WaitSocket:
 
     def __init__(self):
-        # Initialize attributes related to waiting and potential triggers.
+        """
+        Initialize attributes related to waiting and potential triggers.
+        """
         self.active_wait = True
         self.internal_triggers = []
 
@@ -26,27 +26,24 @@ class WaitSocket:
         """
         Check for any new input from the user.
         """
-        # This is a placeholder, actual methods to check user input would be more involved.
+        # Placeholder for actual methods to check user input.
         return None
 
     def check_for_internal_trigger(self):
         """
         Check for any internal system triggers or alerts.
         """
-        # This is a placeholder, actual methods to check internal triggers would be more detailed.
+        # Placeholder for actual methods to check internal triggers.
         return None
 
     def handle_user_input(self, input_data):
         """
         Process the user input and transition to the appropriate phase.
         """
-        # Handle the user input and decide the next steps.
+        # Placeholder to handle the user input and decide the next steps.
 
     def handle_internal_trigger(self, trigger_data):
         """
         Process the internal trigger and take necessary actions.
         """
-        # Handle the internal trigger and decide the next actions.
-
-    # ... Other necessary methods related to waiting and handling triggers ...
-
+        # Placeholder to handle the internal trigger and decide the next actions.

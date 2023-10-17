@@ -19,8 +19,6 @@ class CodingSocket:
         Returns:
         - Execution result and any relevant output or error messages.
         """
-        # Implement logic for executing the code.
-        # Save the output or error messages to code_context.
         execution_result = self.run_code(code_execution_data)
         self.code_context.append(execution_result)
         return execution_result
@@ -35,9 +33,13 @@ class CodingSocket:
         Returns:
         - Output or error messages from the code execution.
         """
-        # Logic to run the code and handle exceptions.
-        # For this pseudo code, the actual implementation is abstracted.
-        return {'type': 'code_execution', 'data': code_data, 'output': 'sample_output'}
+        try:
+            # Logic to run the code.
+            exec_output = exec(code_data)  # Using exec() for demonstration, real implementation might differ.
+            return {'type': 'code_execution', 'data': code_data, 'output': exec_output}
+        except Exception as e:
+            # Handle exceptions and return the error.
+            return {'type': 'code_execution', 'data': code_data, 'output': None, 'error': str(e)}
 
     def get_recent_code_context(self):
         """
@@ -51,5 +53,3 @@ class CodingSocket:
     def clear_code_context(self):
         """Clear the stored code execution context."""
         self.code_context = []
-
-    # ... Other relevant methods related to code execution, validation, and storage.
