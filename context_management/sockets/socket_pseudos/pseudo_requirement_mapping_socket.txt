@@ -1,5 +1,9 @@
 RequirementMappingSocket:
+    ...
 
+    Note: This socket is called by the ContextManager's map_requirements_based_on_intent method to map user intent to actionable requirements.
+
+    ...
 Responsible for translating user intents into actionable system requirements.
 
 class RequirementMappingSocket:

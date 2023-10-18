@@ -2,16 +2,16 @@ SubAgentRegistry Pseudo-Code Enhancement:
 The SubAgentRegistry maintains a record of all active sub-agents within the AGI system. This registry provides methods to add, remove, pause, resume, and query the status of sub-agents.
 
 Initialization:
-Initialize an empty list to keep track of active sub-agents.
+- Initialize an empty list to keep track of active entities (agents and sub-agents).
 
 Registration:
-Add a new sub-agent instance to the active list. Ensure each sub-agent has a unique identifier.
+- Add a new entity (agent or sub-agent) to the active list, specifying its type ('agent' or 'sub_agent').
 
 Deregistration:
-Remove a sub-agent instance from the active list based on its unique identifier.
+- Remove an entity (agent or sub-agent) based on its unique identifier and type.
 
-Active Agents:
-Fetch and return a list of all currently active sub-agents.
+Active Entities:
+- Fetch and return a list of all currently active entities, categorized by type.
 
 Agent Status:
 Query and return the status of a specific sub-agent using its unique identifier.

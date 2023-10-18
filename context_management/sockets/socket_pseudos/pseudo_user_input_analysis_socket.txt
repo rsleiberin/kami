@@ -1,5 +1,9 @@
 UserInputAnalysisSocket:
+    ...
 
+    Note: This socket is called by the ContextManager's capture_and_analyze_user_input method to capture and analyze user input.
+
+    ...
 Responsible for capturing and analyzing user input to determine their intent.
 
 class UserInputAnalysisSocket:

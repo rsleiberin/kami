@@ -1,5 +1,11 @@
 FeedbackSocket:
 
+    ...
+
+    Note: This socket is called by the ContextManager's collect_feedback and check_feedback_for_issues methods to collect feedback and check for issues.
+
+    ...
+
 Collects feedback on the newly integrated code, which can be from system tests, logs, or user interactions.
 
 class FeedbackSocket:

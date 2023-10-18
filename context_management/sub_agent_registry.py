@@ -1,31 +1,35 @@
 class SubAgentRegistry:
 
     def __init__(self):
-        # A list to keep track of all active sub-agents.
-        self.active_agents = []
+        # Initialize the active_entities list to keep track of both agents and sub-agents
+        self.active_entities = []
 
-    def register(self, sub_agent):
+    def register(self, entity, entity_type):
+        self.active_entities.append({"entity": entity, "type": entity_type})
+        
+    def deregister(self, entity, entity_type):
         """
-        Add a new sub-agent to the active list.
+        Remove an entity (agent or sub-agent) from the active list.
         """
-        self.active_agents.append(sub_agent)
+        self.active_entities = [e for e in self.active_entities if e['entity'] != entity or e['type'] != entity_type]
+        print(f"Entity deregistered: {self.active_entities}")  # Debugging line
 
-    def deregister(self, sub_agent):
+    def get_active_agents(self, entity_type=None):
         """
-        Remove a sub-agent from the active list.
+        Return a list of all active entities of the given type.
+        If entity_type is None, return all active entities.
         """
-        self.active_agents.remove(sub_agent)
+        if entity_type:
+            return [entity for entity in self.active_entities if entity['type'] == entity_type]
+        else:
+            return self.active_entities
 
-    def get_active_agents(self):
+    def get_agent_status(self, entity, entity_type):
         """
-        Return a list of all active sub-agents.
+        Query the status of a specific entity (could be an agent or a sub-agent).
+        For this example, we're just returning a placeholder as the actual implementation may vary.
         """
-        return self.active_agents
+        # Placeholder for actual implementation
+        return "Active"
 
-    def get_agent_status(self, sub_agent):
-        """
-        Query the status of a specific sub-agent.
-        """
-        return sub_agent.get_status()
-
-    # ... Additional methods for further sub-agent management and operations ...
+    # ..

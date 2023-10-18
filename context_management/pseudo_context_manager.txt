@@ -1,48 +1,151 @@
-class ContextManager:
+ContextManager Pseudo-Code:
 
-    Initialize:
-        - Set up the core and auxiliary sockets.
-        - Set up a buffer to store context data.
-        - Set the default token limit.
-        - Load user preferences and past interactions.
+File Information:
+- File Path: context_management/context_manager.py
+- Connected Files: 
+    - feedback_socket.py
+    - user_input_analysis_socket.py
+    - requirement_mapping_socket.py
+    - sub_agent_registry.py
+- Primary Role: Manages context and socket interactions for the AGI system.
 
-    Method load_user_data:
-        - Load user preferences and past interactions.
-        - Fetch data from storage (could be a database or local file).
-        - Update the current context with this data.
+Initialize:
+- Set up the core and auxiliary sockets.
+- Initialize SubAgentRegistry instance.
+- Set up a buffer to store context data.
+- Set the default token limit.
+- Load user preferences and past interactions.
+    - Trace Function: print_tracer("ContextManager", "Initialize", "Start")
 
-    Method add_socket(socket_name, socket_instance):
-        - Add a new socket instance to active_sockets.
+Method load_user_data:
+    - Purpose: Load user preferences and past interactions.
+    - Trace Function: print_tracer("ContextManager", "load_user_data", "Start")
+    - Fetch data from storage.
+    - Update the current context with this data.
+    - Trace Function: print_tracer("ContextManager", "load_user_data", "End")
 
-    Method process_socket(socket_name, *args, **kwargs):
-        - Process a specific socket and retrieve its context.
-        - Add the context data to context_buffer.
-        - Manage the token limit to ensure it's not exceeded.
+Method add_socket(socket_name, socket_instance):
+    - Purpose: Add a new socket instance to active_sockets.
+    - Trace Function: print_tracer("ContextManager", "add_socket", "Start")
+    - Add the socket instance to active_sockets.
+    - Trace Function: print_tracer("ContextManager", "add_socket", "End")
 
-    Method manage_token_limit:
-        - Manage the context to fit within the token limit.
-        - Implement strategies like truncation or prioritization when token limit is exceeded.
+Method process_socket(socket_name, *args, **kwargs):
+    - Purpose: Process a specific socket and retrieve its context.
+    - Trace Function: print_tracer("ContextManager", "process_socket", "Start")
+    - Process the socket and collect its context data.
+    - Add the context data to the context_buffer.
+    - Trace Function: print_tracer("ContextManager", "process_socket", "End")
 
-    Method get_context:
-        - Retrieve the current context buffer.
+Method manage_token_limit:
+    - Purpose: Manage the context to fit within the token limit.
+    - Trace Function: print_tracer("ContextManager", "manage_token_limit", "Start")
+    - Implement strategies like truncation or prioritization when token limit is exceeded.
+    - Trace Function: print_tracer("ContextManager", "manage_token_limit", "End")
 
-    Method activate_socket(socket_name, socket_instance):
-        - Activate (or add) a specific socket for specialized context processing.
+Method get_context:
+    - Purpose: Retrieve the current context buffer.
+    - Trace Function: print_tracer("ContextManager", "get_context", "Start")
+    - Retrieve and return the current context_buffer.
+    - Trace Function: print_tracer("ContextManager", "get_context", "End")
 
-    Method deactivate_socket(socket_name):
-        - Deactivate (or remove) a specific socket, stopping its context processing.
+Method activate_socket(socket_name, socket_instance):
+    - Purpose: Activate (or add) a specific socket for specialized context processing.
+    - Trace Function: print_tracer("ContextManager", "activate_socket", "Start")
+    - Add or replace the socket instance in active_sockets.
+    - Trace Function: print_tracer("ContextManager", "activate_socket", "End")
 
-    Method get_context_for_LLMSwitcher:
-        - Prepare and return the context tailored for the LLM switcher.
+Method deactivate_socket(socket_name):
+    - Purpose: Deactivate (or remove) a specific socket, stopping its context processing.
+    - Trace Function: print_tracer("ContextManager", "deactivate_socket", "Start")
+    - Remove the socket instance from active_sockets.
+    - Trace Function: print_tracer("ContextManager", "deactivate_socket", "End")
 
-    Method clear_context:
-        - Clear the context buffer.
+Method get_context_for_LLMSwitcher:
+    - Purpose: Prepare and return the context tailored for the LLM switcher.
+    - Trace Function: print_tracer("ContextManager", "get_context_for_LLMSwitcher", "Start")
+    - Format and return context_buffer suitable for LLM switcher.
+    - Trace Function: print_tracer("ContextManager", "get_context_for_LLMSwitcher", "End")
 
-    Method update_token_limit(new_limit):
-        - Update the token limit.
+Method clear_context:
+    - Purpose: Clear the context buffer.
+    - Trace Function: print_tracer("ContextManager", "clear_context", "Start")
+    - Empty the context_buffer.
+    - Trace Function: print_tracer("ContextManager", "clear_context", "End")
 
-    Method save_context:
-        - Persistently save the current context.
-        - Implement the saving logic, whether to a file or database.
+Method update_token_limit(new_limit):
+    - Purpose: Update the token limit.
+    - Trace Function: print_tracer("ContextManager", "update_token_limit", "Start")
+    - Set token_limit to new_limit.
+    - Trace Function: print_tracer("ContextManager", "update_token_limit", "End")
 
-    ... Additional methods for further context processing and management ...
+Method save_context:
+    - Purpose: Persistently save the current context.
+    - Trace Function: print_tracer("ContextManager", "save_context", "Start")
+    - Implement the saving logic, whether to a file or database.
+    - Trace Function: print_tracer("ContextManager", "save_context", "End")
+
+Method collect_feedback:
+    - Purpose: Collect feedback data from FeedbackSocket.
+    - Trace Function: print_tracer("ContextManager", "collect_feedback", "Start")
+    - Call FeedbackSocket.collect_initial_feedback and store the result in feedback_data.
+    - Append feedback_data to context_buffer.
+    - Trace Function: print_tracer("ContextManager", "collect_feedback", "End")
+
+Method check_feedback_for_issues:
+    - Purpose: Check for any issues in the feedback.
+    - Trace Function: print_tracer("ContextManager", "check_feedback_for_issues", "Start")
+    - Retrieve the latest feedback data from context_buffer.
+    - Use FeedbackSocket's indicates_issues_or_improvements method to check for issues.
+    - Trace Function: print_tracer("ContextManager", "check_feedback_for_issues", "End")
+
+Method capture_and_analyze_user_input:
+    - Purpose: Capture and analyze user input to determine intent.
+    - Trace Function: print_tracer("ContextManager", "capture_and_analyze_user_input", "Start")
+    - Create an instance of UserInputAnalysisSocket.
+    - Capture user input and analyze it to determine intent.
+    - Append the user input and its analyzed intent to context_buffer.
+    - Trace Function: print_tracer("ContextManager", "capture_and_analyze_user_input", "End")
+
+Method map_requirements_based_on_intent(intent):
+    - Purpose: Map the provided intent to actionable requirements.
+    - Trace Function: print_tracer("ContextManager", "map_requirements_based_on_intent", "Start")
+    - Create an instance of RequirementMappingSocket.
+    - Call RequirementMappingSocket.map with the provided intent to get actionable requirements.
+    - Append the intent and its mapped requirements to context_buffer.
+    - Trace Function: print_tracer("ContextManager", "map_requirements_based_on_intent", "End")
+
+Method register_agent(agent):
+    - Purpose: Register a new agent using the SubAgentRegistry.
+    - Trace Function: print_tracer("ContextManager", "register_agent", "Start")
+    - Use SubAgentRegistry.register to register the agent.
+    - Update context_buffer with information that the agent has been registered.
+    - Trace Function: print_tracer("ContextManager", "register_agent", "End")
+
+Method register_sub_agent(sub_agent):
+    - Purpose: Register a new sub-agent using the SubAgentRegistry.
+    - Trace Function: print_tracer("ContextManager", "register_sub_agent", "Start")
+    - Use SubAgentRegistry.register to register the sub-agent.
+    - Update context_buffer with information that the sub-agent has been registered.
+    - Trace Function: print_tracer("ContextManager", "register_sub_agent", "End")
+
+Method get_active_sub_agents:
+    - Purpose: Fetch the list of active sub-agents from the SubAgentRegistry.
+    - Trace Function: print_tracer("ContextManager", "get_active_sub_agents", "Start")
+    - Call SubAgentRegistry.get_active_agents with the "sub_agent" type.
+    - Update context_buffer with the list of active sub-agents.
+    - Trace Function: print_tracer("ContextManager", "get_active_sub_agents", "End")
+
+Error Handling:
+    - Incorporate try-except blocks in methods that might raise exceptions.
+    - In the exception block:
+        - Call print_tracer with the "Error" event.
+        - Handle the error using a standardized handle_error function.
+
+Return Statements:
+    - Be explicit about returns.
+    - If a method can return multiple types, document this in the method's docstring.
+
+Consistency:
+    - Apply this guide consistently across all methods in the ContextManager.
+    - Periodically review and refine this guide as the application evolves.
