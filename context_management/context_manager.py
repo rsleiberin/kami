@@ -75,12 +75,10 @@ class ContextManager:
         return context
 
     def activate_socket(self, socket_name, socket_instance):
-        """Activate (or add) a specific socket for specialized context processing."""
+        print("Debug: Inside activate_socket")  # Debug statement
         print_tracer("ContextManager", "activate_socket", "Start", f"Activating socket: {socket_name}")
-        
         self.active_sockets[socket_name] = socket_instance
         print_tracer("ContextManager", "activate_socket", "Event", f"Socket {socket_name} activated.")
-        
         print_tracer("ContextManager", "activate_socket", "End")
 
 
