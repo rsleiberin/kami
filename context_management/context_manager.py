@@ -41,9 +41,12 @@ class ContextManager:
     def process_socket(self, socket_name, *args, **kwargs):
         """Process a specific socket and retrieve its context."""
         print_tracer("ContextManager", "process_socket", "Start")
+        print("Debug: Active Sockets:", self.active_sockets)  # Debug line
         socket_instance = self.active_sockets.get(socket_name)
+        print("Debug: Socket Instance:", socket_instance)  # Debug line
         if socket_instance:
             context_data = socket_instance.process(*args, **kwargs)
+            print("Debug: Context Data to be Appended:", context_data)  # Debug line
             self.context_buffer.append(context_data)
             self.manage_token_limit()
             print_tracer("ContextManager", "process_socket", "Event", f"Processed socket {socket_name}.")

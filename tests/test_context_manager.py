@@ -46,8 +46,10 @@ class TestContextManager(unittest.TestCase):
         mock_socket_instance.process.return_value = {'some': 'context'}
         
         # Call the method to test
+        cm.active_sockets['MockSocket'] = mock_socket_instance
+
         cm.process_socket('MockSocket', mock_socket_instance)
-        
+
         # Check if print_tracer was called with the correct parameters
         mock_print_tracer.assert_any_call("ContextManager", "process_socket", "Start")
         mock_print_tracer.assert_any_call("ContextManager", "process_socket", "End")
