@@ -1,0 +1,24 @@
+# Pseudo-code for DynamicWhitelist class in dynamic_whitelist.py
+
+# Import required modules
+- Import json module for reading and writing JSON files
+
+# DynamicWhitelist Class Definition
+## Initialize Whitelist
+- Try to read 'whitelist.json' to initialize the whitelist
+- If file not found, initialize an empty whitelist dictionary
+
+## Method: add_to_whitelist
+- Add a class and its corresponding module to the whitelist
+- Save the updated whitelist to 'whitelist.json'
+
+## Method: remove_from_whitelist
+- Remove a class from the whitelist
+- Save the updated whitelist to 'whitelist.json'
+
+## Method: is_whitelisted
+- Check if a class is in the whitelist
+- Return True if it is, else False
+
+## Private Method: _save
+- Save the current whitelist to 'whitelist.json'

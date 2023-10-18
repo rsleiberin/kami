@@ -1,0 +1,9 @@
+Safety System Overview
+The safety system for Project Kami incorporates various measures to ensure the robustness and security of the system. These include:
+
+Whitelist Layer: A static list of commands and functions that are universally approved for execution.
+User-Specific Permissions Layer: Personalized permissions that allow users to set boundaries for what their AGI can and can't do.
+Human-in-the-Loop Layer: A fail-safe layer where a human operator must give the final approval for specific actions.
+Identity Binding: The AGI is tied to the identity of an individual at the core level, ensuring personalized safety.
+Traceability: All actions and function calls are logged for review and potential rollback.
+Dynamic Risk Assessment: Real-time evaluation of actions based on a risk scoring system.
