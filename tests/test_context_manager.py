@@ -200,8 +200,111 @@ class TestContextManager(unittest.TestCase):
         
         # Further assertions related to the method's behavior (like checking if the socket is deactivated)
         self.assertIsNone(cm.active_sockets.get('MockSocket'))
+    
+    @patch('context_management.context_manager.print_tracer')  # Mock the print_tracer method
+    def test_get_context_for_LLMSwitcher(self, mock_print_tracer):
+        # Create an instance of ContextManager
+        cm = ContextManager()
+        
+        # Setup a mock context_buffer for this instance
+        mock_context_buffer = {'some': 'context'}
+        cm.context_buffer = mock_context_buffer
+        
+        # Call the method to test
+        returned_context = cm.get_context_for_LLMSwitcher()
+        
+        # Check if print_tracer was called with the correct parameters
+        mock_print_tracer.assert_any_call("ContextManager", "get_context_for_LLMSwitcher", "Start")
+        mock_print_tracer.assert_any_call("ContextManager", "get_context_for_LLMSwitcher", "End")
+        
+        # Further assertions related to the method's behavior (like checking if the context is returned correctly)
+        self.assertEqual(returned_context, mock_context_buffer)
 
+    @patch('context_management.context_manager.print_tracer')  # Mock the print_tracer method
+    def test_clear_context(self, mock_print_tracer):
+        # Create an instance of ContextManager
+        cm = ContextManager()
+        
+        # Populate the context buffer with some data
+        cm.context_buffer = {'key': 'value'}
+        
+        # Call the method to test
+        cm.clear_context()
+        
+        # Check if print_tracer was called with the correct parameters
+        mock_print_tracer.assert_any_call("ContextManager", "clear_context", "Start")
+        mock_print_tracer.assert_any_call("ContextManager", "clear_context", "Event", "Context buffer cleared.")
+        mock_print_tracer.assert_any_call("ContextManager", "clear_context", "End")
+        
+        # Further assertions to ensure the context buffer is actually cleared
+        self.assertEqual(cm.context_buffer, {})
 
+    @patch('context_management.context_manager.print_tracer')  # Mock the print_tracer method
+    def test_update_token_limit(self, mock_print_tracer):
+        # Create an instance of ContextManager
+        cm = ContextManager()
+        
+        # Define a new token limit
+        new_limit = 2000
+        
+        # Call the method to test
+        cm.update_token_limit(new_limit)
+        
+        # Check if print_tracer was called with the correct parameters
+        mock_print_tracer.assert_any_call("ContextManager", "update_token_limit", "Start", f"New limit: {new_limit}")
+        mock_print_tracer.assert_any_call("ContextManager", "update_token_limit", "Event", f"Token limit updated to {new_limit}.")
+        mock_print_tracer.assert_any_call("ContextManager", "update_token_limit", "End")
+        
+        # Further assertions to ensure the token limit is actually updated
+        self.assertEqual(cm.token_limit, new_limit)
+
+    @patch('context_management.context_manager.print_tracer')  # Mock the print_tracer method
+    def test_save_context(self, mock_print_tracer):
+        # Create an instance of ContextManager
+        cm = ContextManager()
+        
+        # Call the method to test
+        cm.save_context()
+        
+        # Check if print_tracer was called with the correct parameters
+        mock_print_tracer.assert_any_call("ContextManager", "save_context", "Start")
+        mock_print_tracer.assert_any_call("ContextManager", "save_context", "Event", "Context saved successfully.")
+        mock_print_tracer.assert_any_call("ContextManager", "save_context", "End")
+
+    @patch('context_management.context_manager.print_tracer')  # Mock the print_tracer method
+    @patch('context_management.context_manager.FeedbackSocket.collect_initial_feedback')  # Mock the collect_initial_feedback method
+    def test_collect_feedback(self, mock_collect_initial_feedback, mock_print_tracer):
+        # Create an instance of ContextManager
+        cm = ContextManager()
+        
+        # Mock the feedback data
+        mock_collect_initial_feedback.return_value = {'some': 'feedback'}
+        
+        # Call the method to test
+        cm.collect_feedback()
+        
+        # Check if print_tracer was called with the correct parameters
+        mock_print_tracer.assert_any_call("ContextManager", "collect_feedback", "Start")
+        mock_print_tracer.assert_any_call("ContextManager", "collect_feedback", "Event", "Feedback collected successfully.")
+        mock_print_tracer.assert_any_call("ContextManager", "collect_feedback", "End")
+
+    @patch('context_management.context_manager.print_tracer')  # Mock the print_tracer method
+    @patch('context_management.context_manager.FeedbackSocket.indicates_issues_or_improvements')  # Mock the indicates_issues_or_improvements method
+    def test_check_feedback_for_issues(self, mock_indicates_issues_or_improvements, mock_print_tracer):
+        # Create an instance of ContextManager
+        cm = ContextManager()
+        
+        # Mock the feedback data and method
+        cm.context_buffer.append({"Feedback": {'some': 'feedback'}})
+        mock_indicates_issues_or_improvements.return_value = True
+        
+        # Call the method to test
+        cm.check_feedback_for_issues()
+        
+        # Check if print_tracer was called with the correct parameters
+        mock_print_tracer.assert_any_call("ContextManager", "check_feedback_for_issues", "Start")
+        mock_print_tracer.assert_any_call("ContextManager", "check_feedback_for_issues", "Event", "Issues or improvements detected.")
+        mock_print_tracer.assert_any_call("ContextManager", "check_feedback_for_issues", "End")
 
 if __name__ == "__main__":
     unittest.main()
