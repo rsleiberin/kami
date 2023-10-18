@@ -20,7 +20,9 @@ class ContextManager:
         self.load_user_data()
         # Initialize SubAgentRegistry instance
         self.sub_agent_registry = SubAgentRegistry()
-        print_tracer("ContextManager", "__init__", "End") and update context_buffer.
+        print_tracer("ContextManager", "__init__", "End")
+        # TODO: update context_buffer (if this was your intent)
+
 
     def load_user_data(self):
         """Load user preferences and past interactions."""

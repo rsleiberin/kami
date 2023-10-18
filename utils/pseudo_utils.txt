@@ -56,3 +56,25 @@ Ensure to write unit tests for utility methods to confirm their correctness.
 Refactor the codebase regularly to maintain its quality and readability.
 Future-proof the utilities by incorporating functionalities that can dynamically adjust based on new requirements.
 With these updates, the guide should be comprehensive and adaptable to future changes, especially when third-party modules get integrated.
+10. Pseudo-Code Standardization:
+    - Include a section in each code file dedicated to pseudo-code.
+    - The pseudo-code should describe the intent and high-level logic of the code.
+    - Update the pseudo-code whenever the actual code changes.
+    - Use standardized tags or markers to correlate lines in the pseudo-code with the actual code.
+
+11. Traceability in Pseudo-Code:
+    - Add a parameter to the print_tracer function to accept a reference line from the pseudo-code.
+    - Use this line reference to trace back to the original intent if needed.
+    - Include in the pseudo-code a section that describes how the current method connects to other methods, especially if they are in different modules.
+
+12. Testing in Pseudo-Code:
+    - Include comments in the pseudo-code that describe the types of tests that should be written for the described functionality.
+    - This helps to ensure that future developers are aware of the testing requirements.
+
+13. Method Connectivity in Pseudo-Code:
+    - Describe how the method connects to other methods in the pseudo-code.
+    - This is particularly important for understanding the workflow across different modules.
+
+14. Updating Pseudo-Code:
+    - Pseudo-code should be updated whenever the actual code changes.
+    - Include a workflow in your guide for how to update the pseudo-code.
