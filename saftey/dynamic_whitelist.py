@@ -1,35 +1,38 @@
-# Import required modules
 import json
+from utils.utils import print_tracer
 
 class DynamicWhitelist:
     def __init__(self):
-        # Load the existing whitelist from a file or initialize an empty one
+        print_tracer("DynamicWhitelist", "__init__", "Start")
         try:
             with open('whitelist.json', 'r') as f:
                 self.whitelist = json.load(f)
         except FileNotFoundError:
+            print_tracer("DynamicWhitelist", "__init__", "Error", "whitelist.json not found")
             self.whitelist = {}
+        print_tracer("DynamicWhitelist", "__init__", "End")
 
     def add_to_whitelist(self, class_name, module_name):
-        # Add a class to the whitelist
+        print_tracer("DynamicWhitelist", "add_to_whitelist", "Start")
         self.whitelist[class_name] = module_name
         self._save()
+        print_tracer("DynamicWhitelist", "add_to_whitelist", "End")
 
     def remove_from_whitelist(self, class_name):
-        # Remove a class from the whitelist
         if class_name in self.whitelist:
             del self.whitelist[class_name]
             self._save()
+        else:
+            raise KeyError(f"{class_name} not found in whitelist.")
 
     def is_whitelisted(self, class_name):
-        # Check if a class is in the whitelist
-        return class_name in self.whitelist
+        print_tracer("DynamicWhitelist", "is_whitelisted", "Start")
+        result = class_name in self.whitelist
+        print_tracer("DynamicWhitelist", "is_whitelisted", "End")
+        return result
 
     def _save(self):
-        # Save the current state of the whitelist to a file
+        print_tracer("DynamicWhitelist", "_save", "Start")
         with open('whitelist.json', 'w') as f:
             json.dump(self.whitelist, f)
-
-# Example usage:
-# whitelist = DynamicWhitelist()
-# whitelist.add_to_whitelist("SomeClass", "some_module")
+        print_tracer("DynamicWhitelist", "_save", "End")

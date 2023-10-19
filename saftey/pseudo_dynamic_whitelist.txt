@@ -1,4 +1,4 @@
-# Pseudo-code for DynamicWhitelist class in dynamic_whitelist.py
+# Updated Pseudo-code for DynamicWhitelist class in dynamic_whitelist.py
 
 # Import required modules
 - Import json module for reading and writing JSON files
@@ -7,18 +7,28 @@
 ## Initialize Whitelist
 - Try to read 'whitelist.json' to initialize the whitelist
 - If file not found, initialize an empty whitelist dictionary
+- Use print_tracer for debugging and context
 
 ## Method: add_to_whitelist
 - Add a class and its corresponding module to the whitelist
+- Use print_tracer for debugging and context
 - Save the updated whitelist to 'whitelist.json'
 
 ## Method: remove_from_whitelist
 - Remove a class from the whitelist
+- Use print_tracer for debugging and context
 - Save the updated whitelist to 'whitelist.json'
+- Include try-except blocks for error handling
 
 ## Method: is_whitelisted
 - Check if a class is in the whitelist
+- Use print_tracer for debugging and context
+- Include try-except blocks for error handling
 - Return True if it is, else False
 
 ## Private Method: _save
 - Save the current whitelist to 'whitelist.json'
+- Use print_tracer for debugging and context
+
+# Unit Tests
+- Write unit tests for each method to ensure it behaves as expected

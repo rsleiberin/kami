@@ -1,0 +1,18 @@
+# Import required modules and classes
+from utils.state_utils import (load_state, save_state, update_state)
+
+# Initialize State Manager
+def __init__():
+    # Initialize empty state dictionary
+    self.state = {}
+    
+    # Load existing state from disk
+    load_state(self.state)
+
+# Method to update state
+def update_state(key, value):
+    # Update state dictionary
+    update_state(self.state, key, value)
+    
+    # Save state to disk
+    save_state(self.state)

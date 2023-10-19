@@ -1,0 +1,2 @@
+# The existing state_utils.py file remains in the utils folder as is,
+# since it's a utility file that may be used by different parts of the application.
