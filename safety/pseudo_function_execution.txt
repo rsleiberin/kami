@@ -1,9 +1,0 @@
-# Pseudo-code for function_execution.py
-
-# Import required modules
-- Import necessary modules for function execution
-
-# Function: execute_function
-- Accept a function call as an argument
-- Execute the function call
-- Return the result

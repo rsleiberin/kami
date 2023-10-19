@@ -1,0 +1,32 @@
+# Pseudo-code for permission_management.py
+
+# Import Section:
+- Import os for file path manipulations
+- Import json for reading and writing JSON files
+- Import print_tracer from utils for debugging and context
+
+# Function: load_whitelist
+1. Start Trace: Call print_tracer indicating the start of the load_whitelist function
+2. Try-Catch Block:
+    - Try:
+        1. Open the 'whitelist.json' file in read mode
+        2. Load the JSON data into a variable named whitelist
+    - Except FileNotFoundError:
+        1. Trace an Error: Call print_tracer indicating an error event that 'whitelist.json' was not found
+        2. Initialize an empty dictionary for whitelist
+3. End Trace: Call print_tracer indicating the end of the load_whitelist function
+4. Return the whitelist dictionary
+
+# Function: load_user_permissions
+1. Start Trace: Call print_tracer indicating the start of the load_user_permissions function
+2. Initialize a variable user_permissions_file with the string "user_permissions.json"
+3. Check if user_permissions_file exists:
+    - If True:
+        1. Open the 'user_permissions.json' file in read mode
+        2. Load the JSON data into a variable named user_permissions
+    - If False:
+        1. Trace an Error: Call print_tracer indicating an error event that 'user_permissions.json' was not found
+        2. Create 'user_permissions.json' with an empty dictionary
+        3. Initialize an empty dictionary for user_permissions
+4. End Trace: Call print_tracer indicating the end of the load_user_permissions function
+5. Return the user_permissions dictionary
