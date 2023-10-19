@@ -1,0 +1,12 @@
+# Pseudo-code for permission_management.py
+
+# Import required modules
+- Import json for reading and writing JSON files
+
+# Function: load_whitelist
+- Try to read 'whitelist.json' to load the whitelist
+- If file not found, return an empty dictionary
+
+# Function: load_user_permissions
+- Try to read 'user_permissions.json' to load the user permissions
+- If file not found, return an empty dictionary

@@ -1,6 +1,6 @@
 # test_dynamic_whitelist.py
 import unittest
-from saftey.dynamic_whitelist import DynamicWhitelist
+from safety.dynamic_whitelist import DynamicWhitelist
 
 class TestDynamicWhitelist(unittest.TestCase):
 
