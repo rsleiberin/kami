@@ -9,6 +9,13 @@ from utils.utils import print_tracer
 available_functions = {
     "Run": Run,  # Assume Run function is defined somewhere
 }
+'''
+# Example JSON message that ChatGPT can send to query available functions
+{
+    "function_name": "query_available_functions",
+    "arguments": {}
+}
+'''
 
 class ChatGPTAssistant:
     def __init__(self):
@@ -73,22 +80,19 @@ class ChatGPTAssistant:
     def receive_from_chat_gpt(self, chat_gpt_response):
         print_tracer("ChatGPTAssistant", "receive_from_chat_gpt", "Start")
 
-        # Check for NoneType and log the event
         if chat_gpt_response is None:
             print_tracer("ChatGPTAssistant", "receive_from_chat_gpt", "Event", "Received NoneType from ChatGPT")
             return
 
-        # Log the full object received
         print("Full object received from ChatGPT:")
         print(chat_gpt_response)
         print_tracer("ChatGPTAssistant", "receive_from_chat_gpt", "Event", f"chat_gpt_response type: {type(chat_gpt_response)}")
 
         try:
-            # Attempt to parse the chat_gpt_response as JSON
+            # Try decoding the JSON. If it fails, it's likely a regular message.
             chat_gpt_response_dict = json.loads(chat_gpt_response)
             print_tracer("ChatGPTAssistant", "receive_from_chat_gpt", "Event", "JSON successfully decoded")
 
-            # Check for a function call
             function_call = chat_gpt_response_dict.get("function_call")
             if function_call:
                 function_name = function_call.get("name")
@@ -97,12 +101,37 @@ class ChatGPTAssistant:
                 print_tracer("ChatGPTAssistant", "receive_from_chat_gpt", "Event", f"Function {function_name} called with arguments {function_args}")
 
         except json.JSONDecodeError:
-            # Log the failure to decode as JSON and print the string for inspection
-            print_tracer("ChatGPTAssistant", "receive_from_chat_gpt", "Event", "Failed to decode JSON")
-            print("Failed to decode JSON, printing the string for inspection:")
+            # Handle regular messages here
+            print_tracer("ChatGPTAssistant", "receive_from_chat_gpt", "Event", "Failed to decode JSON, likely a regular message")
+            print("Regular message received, printing the string for inspection:")
             print(chat_gpt_response)
 
         print_tracer("ChatGPTAssistant", "receive_from_chat_gpt", "End")
+
+
+        print_tracer("ChatGPTAssistant", "receive_from_chat_gpt", "End")
+    
+    def handle_function_call(self, function_name, function_args):
+        # Implement safety checks, logging, etc. here
+        if self.is_safe_function(function_name, function_args):
+            json_string = json.dumps({
+                "function_name": function_name,
+                "arguments": function_args
+            })
+            return Run(json_string)
+        else:
+            # Handle unsafe function calls
+            return "Unsafe function call attempted."
+
+    def is_safe_function(self, function_name, function_args):
+        # Implement your safety checks here
+        return function_name in approved_functions_list
+
+
+    def update_function_registry(self):
+        # Update 'available_functions' based on a JSON file or a database query
+        pass
+
     def loop(self):
         print_tracer("ChatGPTAssistant", "loop", "Start")
         
