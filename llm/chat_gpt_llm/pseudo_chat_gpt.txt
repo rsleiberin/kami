@@ -1,8 +1,0 @@
-Import Section: Import required modules, including print_tracer from utils.
-Class Definition: Create a class ChatGPTLLM responsible for handling language, logic, and modular functionalities.
-Method: initialize_model: Load the ChatGPT model and initialize any required settings.
-Method: process_request: Extract chat input and context, validate them, and call generate_response.
-Method: generate_response: Send chat input and context to the ChatGPT model, then format and return the output.
-Method: update_context: Update the context buffer with new chat interactions.
-Method: handle_function_output: Parse and execute function calls from the ChatGPT output, then update the context.
-Error Handling: Use print_tracer and try-except blocks for error tracing and handling.

@@ -1,4 +1,0 @@
-pseudo_chat_gpt_interaction.txt
-Import Section: Import print_tracer for traceability.
-Initialize ChatGPT Interaction: Use __init__ to initialize settings and call print_tracer.
-Method: send_message: Code to send a message to ChatGPT. Utilize print_tracer for debugging and context tracking.
