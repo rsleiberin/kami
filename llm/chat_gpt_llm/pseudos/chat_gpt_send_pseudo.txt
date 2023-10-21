@@ -1,0 +1,29 @@
+Pseudo-Code for 'send_to_chat_gpt' method in 'ChatGPTAssistant' Class
+
+1. Start
+    - Trace: [Start] Begin 'send_to_chat_gpt' method.
+2. Initialize
+    - Set OpenAI API key from global config.
+    - Initialize 'messages' list with system and user messages.
+    - Initialize 'functions' list with metadata for the 'Run' function.
+3. API Call
+    - Trace: [API Call Initiated] Before making API call to ChatGPT.
+    - Try:
+        - Call OpenAI's ChatCompletion API with 'messages' and 'functions'.
+        - Fetch 'content' and 'function_call' from the API response.
+        - Trace: [API Call Completed] After receiving API response.
+    - Except:
+        - Trace: [Error] Log any exceptions.
+        - Return None
+4. Process Response
+    - If 'content' is not None, return it.
+    - Else if 'function_call' is not None, return it in JSON format.
+    - Else, return None.
+5. End
+    - Trace: [End] End 'send_to_chat_gpt' method.
+
+6. Traceability
+    - This method is called within the main loop of 'ChatGPTAssistant' class, specifically when user input is received.
+
+7. Tests
+    - Unit tests should cover cases where the API returns content, function call, or an error.

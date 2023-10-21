@@ -1,0 +1,21 @@
+1. Import necessary utility functions.
+2. Extend the existing ChatGPTAssistant class to include a 'loop' method.
+
+Method: loop
+--------------
+1. Start Tracing: Initialize the main loop and wait for user input.
+2. Display a message indicating the assistant is ready.
+3. Enter an infinite loop to handle user interactions:
+    1. Try to execute the following steps:
+        1. Wait for user input and strip it.
+        2. If the input is empty, notify the user and continue the loop.
+        3. Fetch the current context from the Context Manager.
+        4. Send the context and user input to ChatGPT.
+        5. Process the response:
+            1. If a valid response is received, display it.
+            2. Otherwise, indicate failure.
+    2. Handle exceptions:
+        1. KeyboardInterrupt: Exit the loop.
+        2. Other Exceptions: Log the error and continue the loop.
+4. End Tracing: Exiting the main loop.
+

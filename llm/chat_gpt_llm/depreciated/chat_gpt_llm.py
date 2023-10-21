@@ -132,6 +132,9 @@ class ChatGPTAssistant:
         # Update 'available_functions' based on a JSON file or a database query
         pass
 
+    def query_available_functions(self):
+        return json.dumps({"available_functions": list(available_functions.keys())})
+
     def loop(self):
         print_tracer("ChatGPTAssistant", "loop", "Start")
         
