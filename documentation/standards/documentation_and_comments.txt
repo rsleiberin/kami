@@ -1,0 +1,62 @@
+Documentation and Comments Standards Guide
+
+1. Code Comments:
+   - Use inline comments sparingly.
+   - Comments should explain why something is done, not what is being done.
+   - Use complete sentences for comments.
+
+Example:
+# Good
+# Check if the user is authorized before proceeding
+if user.is_authorized:
+    do_something()
+
+# Bad
+# Checking user
+if user.is_authorized:
+    do_something()
+
+2. Docstrings:
+   - Use docstrings for all public modules, functions, classes, and methods.
+   - Follow the PEP 257 docstring conventions.
+
+Example:
+def add(a, b):
+    """
+    Add two numbers together.
+    :param a: first number
+    :param b: second number
+    :return: sum of a and b
+    """
+
+3. README Files:
+   - Include a README file for every module.
+   - The README should include an overview, setup instructions, and examples.
+
+4. Project Documentation:
+   - Use tools like Sphinx to generate project documentation.
+   - Keep the documentation up-to-date with code changes.
+
+5. Comment Blocks:
+   - Use comment blocks for complex algorithms or when you need to explain the reasoning behind multiple lines of code.
+
+6. TODO Comments:
+   - Use TODO comments for code that is temporary or a short-term solution.
+   - Include an identifier and a brief description.
+
+Example:
+# TODO (JohnD): Replace this with a database query
+
+7. Deprecated Code:
+   - Clearly mark deprecated code and explain why it is deprecated.
+   - Provide alternatives if possible.
+
+8. Jargon:
+   - Avoid jargon or acronyms without explanations.
+   - Assume the reader does not have domain-specific knowledge.
+
+9. Version Tracking:
+   - Include version tracking in your comments for changes that are significant.
+
+10. Review:
+    - Periodically review the comments and documentation to ensure they are still accurate.

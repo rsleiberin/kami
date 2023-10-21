@@ -1,44 +1,18 @@
-AGI Process Documentation for kami
-Introduction:
-kami is an ambitious project aimed at achieving Artificial General Intelligence (AGI) through modular, multi-modal contextual training for neural networks. The following document outlines the primary process flow and methodology employed by the system.
+Project Kami README
+Introduction and Vision
+Kami are digital entities designed to act as intelligent agents, representing the essence of humans, natural systems, or any complex abstraction. They are given stable and evolving contextual strings, which form a semblance of ongoing thought and agency. Project Kami extends the power of language by creating Personal AGI that understand us through data, acting as extensions of ourselves. These entities serve to offload personal cognitive and memory tasks, accessible anytime through language-based requests. Through Project Kami, we seek to create a more harmonious and intelligent interaction between all systems.
 
-1. System Overview:
-The kami architecture emphasizes the registration of modules via the module registry and orchestrates their interaction through the context manager/core. All code standardization is managed by the pseudo_utils.txt file within the utils directory after the foundational code skeleton has been established.
+Initial Product Offering
+The primary focus of Project Kami will be on Personal AGI and a GUI for module creation. The Personal AGI will act as a user's digital self, mediating interactions with other Kami and digital systems. The GUI will serve as an interface for users to interact with their Personal AGI and to create new modules that can be adopted and used by other AGI through a marketplace.
 
-2. Initialization:
+Human in the Loop: An Integral Part of the System
+Human involvement serves as a crucial safety mechanism in Project Kami. For some modules to function, a human agent will be needed to act as a mediator or a verifier. This ensures that the actions taken by AGI align with ethical and safety standards. Over time, the role of humans may evolve into that of collaborators or even employees hired by AGI for specific tasks.
 
-Initialize all core sockets and load auxiliary sockets.
-Load user preferences, historical interactions (if any), and initial system configuration.
-Initialize sub-agent registry (to manage and track sub-agents).
-3. AGI Active Loop:
-While the AGI system remains active, it undergoes several phases, including:
+AGI Active Loop
+Once initialized, Kami enter an active loop where they self-manage tasks and occasionally request permissions for new actions. They work continuously in the background, responding to events and user inputs. In some cases, they may actively attempt to hire or recruit humans to perform tasks on their behalf, thereby creating a symbiotic relationship.
 
-User Input Analysis: Capture and analyze user input to determine intent and validate for ambiguities.
+Context Management
+Project Kami emphasizes robust context management to allow for stable and evolving identities among the Kami. This will be particularly useful in creating a digital self that aligns closely with the user's or system's real-world context.
 
-Requirement Mapping: Map the intent to system requirements, validating and prioritizing based on system capabilities and user preferences.
-
-Sub-Agent Creation and Management: If the intent relates to long-term autonomous tasks, create and manage sub-agents accordingly.
-
-Dynamic Task Reduction and Coding: Analyze requirements to determine coding tasks, then generate necessary code for each task.
-
-Integration & Testing: Seamlessly integrate the dynamically generated code and test for functionality.
-
-Feedback Loop for Dynamic Adjustments: Iterate over feedback from testing to refine and improve the generated code.
-
-Event-Driven Activation: Respond to specific events that require special context handling or intervention.
-
-Continuous Learning: Ensure the AGI system continuously observes, learns, and adjusts based on interactions.
-
-Sub-Agent Monitoring and Interaction: Oversee and interact with sub-agents, monitoring their status and updates.
-
-Periodic Self-Review: Identify and decommission outdated or redundant sockets and modules.
-
-Internal Improvement Detection and Action: Proactively detect and implement potential internal optimizations or enhancements.
-
-System Readiness and Responsiveness: Ensure the AGI system remains responsive to new inputs or events.
-
-4. Future Extensions and Roadmap:
-Potential areas for future expansion, as well as planned feature rollouts, will be detailed here.
-
-5. Contributions:
-Details about project contributors, resources utilized, acknowledgments, and other relevant information.
+Future Extensions
+Project Kami is designed to be open-source and modular, allowing for a multitude of future extensions. As the project matures, we anticipate the evolution of a premium marketplace where users can offer and adopt advanced AGI modules. However, the open-source nature of the project will always be maintained.
