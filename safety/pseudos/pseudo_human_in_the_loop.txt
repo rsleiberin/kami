@@ -1,12 +1,16 @@
 1. Import required modules
    - Import load_whitelist, load_user_permissions from safety.permission_management
    - Import execute_function from safety.function_execution
+   - Import print_tracer from utils for debugging and context
 
 2. Define the HumanInTheLoop class
    2.1 __init__()
+       - Start Trace: Call print_tracer to indicate the start of the method
        - Load global settings for the whitelist and user-specific permissions
+       - End Trace: Call print_tracer to indicate the end of the method
 
    2.2 execute_function_with_hitl(func_call, user_id)
+       - Start Trace: Call print_tracer to indicate the start of the method
        2.2.1 Check if the function call is globally whitelisted
            - If yes, execute the function and return the result
        2.2.2 Check if the user has permission to execute this function
@@ -14,9 +18,12 @@
        2.2.3 If not whitelisted or permitted, notify a human for approval
            - If approved, execute the function and return the result
            - If not approved, return "Command not approved"
+       - End Trace: Call print_tracer to indicate the end of the method
 
    2.3 human_approval(func_call, user_id)
+       - Start Trace: Call print_tracer to indicate the start of the method
        - Notify a human operator for approval (this could be through various means)
+       - End Trace: Call print_tracer to indicate the end of the method
        - Return True if approved, False otherwise
 
 3. End of File

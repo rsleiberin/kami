@@ -1,0 +1,21 @@
+# File Structure Standards for Project Kami
+
+## Directory Structure
+1. Each major module (e.g., Safety, ChatGPT) should have its own directory.
+2. Within each module directory, files should be organized based on their functionality.
+3. Common utility functions should reside in a `utils` directory.
+
+## File Naming
+1. Main files in each module should be named `module_base.py`.
+2. Helper methods and classes should be in separate files named `module_method.py` or `module_class.py`.
+3. All file names should be in snake_case.
+
+## Class Separation
+1. Each class should be in its own file within the respective module's directory.
+2. The base file of each module should import all the classes and methods that the module uses.
+
+## Sub-Directories
+1. Include a `pseudos` directory for storing pseudo-code related to each module.
+
+## Special Files
+1. `__init__.py`: This should be present in every module directory to indicate it's a Python package.
