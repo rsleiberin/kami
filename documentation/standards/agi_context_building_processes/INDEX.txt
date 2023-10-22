@@ -1,0 +1,17 @@
+# AGI Context Building Processes - Reading Order
+
+This index outlines the logical reading order for understanding the context-building processes in Project Kami's AGI system.
+
+1. context_initialization_process.txt
+2. requirement_understanding_in_requirements_and_design.txt
+3. environment_assessment_in_integration.txt
+4. code_generation_in_coding.txt
+5. debugging_and_error_handling_in_debugging_and_context.txt
+6. context_enrichment_process.txt
+7. integration_planning_in_integration_process.txt
+8. self_testing_in_testing.txt
+9. context_finalization_in_context_initialization.txt
+10. monitoring_and_feedback_process.txt
+
+Please read the files in the order listed to gain a comprehensive understanding of the context-building processes.
+
