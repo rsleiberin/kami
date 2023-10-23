@@ -11,7 +11,7 @@ Briefly describe the purpose of this directory or file. Mention if it is particu
 List the tasks that this directory or file aims to achieve or has already achieved. Use checkboxes to indicate completion.
 - [ ] Task 1
 - [ ] Task 2
-- [x] Completed Task 3
+
 
 ## Directories
 The following directories are listed in the suggested reading order:
