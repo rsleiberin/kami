@@ -1,19 +1,24 @@
-# Initialization Standards for Project Kami
+# Project Kami - Initialization Standards
 
 ## Introduction
-This directory outlines the standard procedures for initializing new projects or modules within Project Kami. Both human developers and AI agents will find this section essential for understanding how to set up new projects effectively and according to best practices.
+This directory outlines the standard procedures for initializing new projects or modules within Project Kami. It serves as a guide for both human developers and AI agents to set up new projects effectively and according to best practices.
 
-## Goals
-- **Standardize Initialization**: Create a uniform process for initializing new projects and modules.
-- **Facilitate Collaboration**: Make it easier for different team members to understand the setup of new projects.
-- **Sustainability**: Ensure that the initialization process is sustainable and easy to maintain in the long term.
+## Status
+- `In Progress`
+
+## Tasks
+
+## Directories
+The following directories are listed in the suggested reading order.
+(None currently available)
 
 ## Files
-- **In Progress** `Project_Initialization_Guide.md`: A comprehensive guide that walks you through the steps to initialize a new project or module.
-- **In Progress** `Sample_Configurations.md`: Sample configurations for different types of projects.
+The following files are listed in the suggested reading order.
+- `COMPLETED`: [Project_Initialization_Guide.md](./Project_Initialization_Guide.md) - A comprehensive guide that walks you through the steps to initialize a new project or module.
 
-## For Humans
+## Special Considerations
+### For Humans
 - Refer to the files listed above in the suggested reading order for a complete understanding of the initialization process in Project Kami.
 
-## For AI
+### For AIs
 - Consult the files listed above in the suggested reading order for initial context setup and to understand the initialization procedures of Project Kami.

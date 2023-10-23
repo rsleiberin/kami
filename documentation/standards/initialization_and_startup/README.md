@@ -19,9 +19,9 @@ This directory serves as the starting point for anyone—be it human or AI—inv
 The following directories are listed in the suggested reading order (do not include this README):
 
 - `COMPLETED`: [project_onboarding](./project_onboarding) - Instructions for the initial setup.
-- `In Progress`: [compliance_and_security](./compliance_and_security) - Compliance and security measures in Project Kami.
+- `COMPLETED`: [initialization_standards](./initialization_standards) - Process for initializing new projects or modules.
 - `In Progress`: [import_standards](./import_standards) - Standards for importing modules.
-- `In Progress`: [initialization_standards](./initialization_standards) - Process for initializing new projects or modules.
+- `In Progress`: [compliance_and_security](./compliance_and_security) - Compliance and security measures in Project Kami.
 
 ## Files
 The following files are listed in the suggested reading order:
