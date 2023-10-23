@@ -1,0 +1,19 @@
+- [In Progress] `constants/`: Directory of hardcoded constants required by the software.
+- [In Progress] `context_management/`: Handles agent context windows; primary value of the project.
+- [In Progress] `documentation/`: Contains all the standards for the project.
+- [In Progress] `kami/`: Source environment for the Flask application.
+- [In Progress] `llm/`: Houses the logic for various LLMs.
+- [In Progress] `modules/`: Central controller and module registry for the application.
+- [In Progress] `safety/`: Houses all safety-related software and modules.
+- [In Progress] `tests/`: Contains unit tests for the project.
+- [In Progress] `utils/`: Utility module with methods accessible by all modules.
+- [Not Started] `config/`: Could contain configuration files and scripts.
+- [Not Started] `resources/`: Place for storing static resources.
+- [Not Started] `scripts/`: To hold utility scripts for tasks.
+- [Not Started] `third_party/`: For including any third-party libraries.
+- [Not Started] `benchmarks/`: For performance testing and benchmarking.
+- [Not Started] `experiments/`: To keep track of experimental code and results.
+- [In Progress] `README.md`: Project introduction and entry point.
+- [Deprecated] `app.py`: Flask app with deprecated contents.
+- [In Progress] `config.py`: Configuration file with personal keys (gitignored).
+- [In Progress] `requirements.txt`: Lists project dependencies.

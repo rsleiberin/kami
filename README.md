@@ -1,4 +1,8 @@
 Project Kami README
+
+Getting Started
+This README is a breif overview of Project Kami. To get started, please continue reading in the documentation directory.
+
 Introduction and Vision
 Kami are digital entities designed to act as intelligent agents, representing the essence of humans, natural systems, or any complex abstraction. They are given stable and evolving contextual strings, which form a semblance of ongoing thought and agency. Project Kami extends the power of language by creating Personal AGI that understand us through data, acting as extensions of ourselves. These entities serve to offload personal cognitive and memory tasks, accessible anytime through language-based requests. Through Project Kami, we seek to create a more harmonious and intelligent interaction between all systems.
 
