@@ -1,61 +1,65 @@
-#TO BE MERGED WITH python_import_guidelines
+# Python Import Guidelines for Project Kami
 
-Import Standards Guide
-
-1. Order of Imports
-Follow PEP 8 standards for the order of imports.
+## Order of Imports
+Follow PEP 8 standards for the order of imports:
   - Standard library imports
   - Related third-party imports
   - Local application/library-specific imports
 
-Example:
+\`\`\`python
 import os  # Standard library
 import numpy as np  # Third-party library
 from my_module import my_function  # Local application
+\`\`\`
 
-2. Import Specificity
+## Import Specificity
 Always import only what you need. Instead of importing an entire module, import only the specific functions or classes you'll use.
 
-Example:
+\`\`\`python
 from os.path import join  # Good
 import os  # Not specific
+\`\`\`
 
-3. Alias Naming
+## Alias Naming
 If you are using an alias for an import, make sure it's a widely-accepted alias or makes the code clearer.
 
-Example:
+\`\`\`python
 import numpy as np  # Widely-accepted alias
+\`\`\`
 
-4. Circular Dependencies
+## Circular Dependencies
 Be cautious of circular dependencies. If two modules are dependent on each other, consider refactoring.
 
-5. Commenting Imports
+## Commenting Imports
 If an import is not self-explanatory, include a comment explaining what it's used for.
 
-Example:
+\`\`\`python
 from sklearn.tree import DecisionTreeClassifier  # For decision tree algorithm
+\`\`\`
 
-6. Import Statements Length
+## Import Statements Length
 If an import statement exceeds the maximum line length, break it down into multiple lines.
 
-Example:
+\`\`\`python
 from my_module import (function_one,
                        function_two,
                        function_three)
+\`\`\`
 
-7. Dynamic Imports
+## Dynamic Imports
 Use dynamic imports only if absolutely necessary and ensure they are handled safely.
 
-Example:
+\`\`\`python
 # Avoid
 module = __import__('module_name')
 
 # Prefer
 import importlib
 module = importlib.import_module('module_name')
+\`\`\`
 
-8. Deprecation and Future Updates
+## Deprecation and Future Updates
 Periodically check for deprecated modules or functions and update them.
 
-9. Versioning
+## Versioning
 Make sure to note the version of third-party libraries if your code is tightly coupled with it.

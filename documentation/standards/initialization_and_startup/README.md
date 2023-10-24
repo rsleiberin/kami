@@ -12,8 +12,6 @@ The following files are listed in the suggested reading order:
 - `COMPLETED`: [software_installation_guide.md](./software_installation_guide.md) - Instructions for installing the necessary software and dependencies to get started with Project Kami.
 - `COMPLETED`: [project_initialization_guide.md](./project_initialization_guide.md) - A comprehensive guide that walks you through the steps to initialize a new project or module in Project Kami.
 - `COMPLETED`: [project_workflow_and_structure.md](./project_workflow_and_structure.md) - This guide outlines the recommended workflow and structure for projects in Project Kami.
-- `COMPLETED`: [import_standards.md](./import_standards.md) - An overview of the standards for importing modules in Project Kami.
-- `COMPLETED`: [python_import_guidelines.md](./python_import_guidelines.md) - Detailed guidelines for importing modules in Python.
 - `COMPLETED`: [legal_compliance_guidelines.md](./legal_compliance_guidelines.md) - Guidelines on the legal frameworks that the project needs to consider.
 - `COMPLETED`: [security_best_practices.md](./security_best_practices.md) - A comprehensive guide to security best practices in coding and data management.
 - `COMPLETED`: [audit_and_logging_standards.md](./audit_and_logging_standards.md) - Standards for auditing and logging within Project Kami.
