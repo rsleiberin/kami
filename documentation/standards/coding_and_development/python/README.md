@@ -11,11 +11,11 @@ This directory provides guidelines and best practices for Python development wit
 - [ ] Provide guidelines for Python-specific functionalities
 - [ ] Outline how to deal with Python dependencies
 
-## [IMPORTANT FOR CONTEXT] Directories
-(None currently available)
-
-## [IMPORTANT FOR CONTEXT] Files
+## Files
 - `In Progress`: [python_import_guidelines.md](./python_import_guidelines.md) - Standards for Python imports.
+
+## Directories
+(None currently available)
 
 ## Special Considerations
 ### For Humans

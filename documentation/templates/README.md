@@ -11,14 +11,14 @@ This directory contains various templates that are utilized throughout Project K
 - [ ] Create guide templates
 -- [ ] Define guide templates
 
+## Files
+The following files are listed in the suggested reading order (do not include this README):
+- `In Progress`: [README_template.md](./README_template.md) - The standard template for README files in Project Kami.
+
 ## Directories
 The following directories are listed in the suggested reading order:
 
 (None currently available)
-
-## Files
-The following files are listed in the suggested reading order (do not include this README):
-- `In Progress`: [README_template.md](./README_template.md) - The standard template for README files in Project Kami.
 
 ## Special Considerations
 ### For Humans

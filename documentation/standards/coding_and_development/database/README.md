@@ -11,10 +11,10 @@ This directory serves as the resource for database development standards, focusi
 - [ ] Provide guidelines for database schema design
 - [ ] Outline data integrity and security standards
 
-## [IMPORTANT FOR CONTEXT] Directories
+## Files
 (None currently available)
 
-## [IMPORTANT FOR CONTEXT] Files
+## Directories
 (None currently available)
 
 ## Special Considerations

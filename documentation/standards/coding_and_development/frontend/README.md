@@ -11,10 +11,10 @@ This directory outlines the standards and guidelines for frontend development in
 - [ ] Document CSS standards
 - [ ] Document JavaScript standards
 
-## [IMPORTANT FOR CONTEXT] Directories
+## Files
 (None currently available)
 
-## [IMPORTANT FOR CONTEXT] Files
+## Directories
 (None currently available)
 
 ## Special Considerations

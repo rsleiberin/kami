@@ -11,15 +11,15 @@ This directory contains all essential documentation for Project Kami. It's desig
 -- [ ] Update documentation READMEs
 - [ ] Implement new README template across all directories
 
-## Directories
-The following directories are listed in the suggested reading order:
-- `In Progress`: [standards](./standards) - Contains guidelines and procedures that outline the standards for code, design, and operation within Project Kami.
-- `In Progress`: [templates](./templates) - Houses templates for various document types, including READMEs and guides.
-
 ## Files
 The following files are listed in the suggested reading order (do not include this README):
 
 (None currently available)
+
+## Directories
+The following directories are listed in the suggested reading order:
+- `In Progress`: [standards](./standards) - Contains guidelines and procedures that outline the standards for code, design, and operation within Project Kami.
+- `In Progress`: [templates](./templates) - Houses templates for various document types, including READMEs and guides.
 
 ## Special Considerations
 ### For Humans
