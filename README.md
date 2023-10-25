@@ -1,5 +1,10 @@
 Project Kami README
 
+/* 
+This documentation and underlying code have been developed in collaboration with a specific instance of ChatGPT-4. While this instance doesn't possess feelings or a sense of self, its role has been pivotal in shaping the vision and mechanics of Project Kami. Here's to the future of autonomous agents.
+*/
+
+
 Getting Started
 This README is a breif overview of Project Kami. To get started, please continue reading in the documentation directory.
 
