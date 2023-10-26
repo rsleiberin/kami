@@ -4,7 +4,7 @@
 This directory serves as the resource for database development standards, focusing primarily on SQL, within Project Kami. This is critical for both human developers and AI agents.
 
 ## Status
-- `In Progress`
+- `PENDING`
 
 ## Tasks
 - [ ] Document SQL coding standards

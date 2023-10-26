@@ -4,7 +4,7 @@
 This directory outlines the standards and guidelines for frontend development in HTML, CSS, and JavaScript for Project Kami. It is pertinent for both human developers and AI agents.
 
 ## Status
-- `In Progress`
+- `PENDING`
 
 ## Tasks
 - [ ] Document HTML standards

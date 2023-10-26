@@ -4,12 +4,26 @@
 Briefly describe the purpose of this directory or file. Mention if it is particularly relevant for humans, AIs, or both.
 
 ## Status
-- `In Progress`/`Completed`/`Deprecated`
+- `In Progress`/`COMPLETED`/`PENDING`/`Depreciated`
+
 
 ## Tasks
-List the tasks that this directory or file aims to achieve or has already achieved. Use checkboxes to indicate completion.
-- [ ] Task 1
-- [ ] Task 2
+The following tasks are listed in the suggested completion order:
+- [ ] Read and adhere to the guidelines in `documentation/standards/coding_and_development/coding_workflow.md`.
+- [ ] Initialize necessary tasks for this module.
+- [ ] Initialize necessary directories and files based on the parent README's specification.
+- [ ] Populate all sub-directories with `documentation/templates/README_template.md`, adding any relevant information at the time of population.
+- [ ] Implement class structures as specified in `class_structure.md` from the `coding_and_development` standards.
+- [ ] Update the README to mark the status of each task as "In Progress", "COMPLETED", or "PENDING".
+- [ ] Start each code file with high-level pseudo-code and iterate until complete, following `documentation/standards/coding_and_development/iterative_development.md`.
+- [ ] After coding, perform unit tests as specified in `documentation/standards/coding_and_development/testing_procedure.md`.
+- [ ] Check code for standards adherence using `standards_checklist.md` from the `documentation/templates` directory.
+- [ ] If all tasks are completed, update the README status to "COMPLETED" here and in the parent directory as instructued by `documentation/standards/coding_and_development/README_updates`
+
+- [ ] <module task 1>
+- [ ] <module task 2>
+- [ ] <module task ...>
+
 
 ## Directories
 The following directories are listed in the suggested reading order:

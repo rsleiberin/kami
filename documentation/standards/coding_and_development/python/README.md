@@ -4,11 +4,10 @@
 This directory provides guidelines and best practices for Python development within Project Kami. It is essential for both human developers and AI agents.
 
 ## Status
-- `In Progress`
+- `PENDING`
 
 ## Tasks
-- [ ] Detail Python-specific functionalities like list comprehensions, generators, decorators, etc.
-- [ ] Outline how to deal with Python dependencies
+- [ ] Research and understand version control practices the project needs to utilize as it expands in complexity.
 
 ## Files
 - `COMPLETED`: [python_code_formatting.md](./python_code_formatting.md) - Guidelines on Python code formatting.

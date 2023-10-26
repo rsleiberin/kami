@@ -13,7 +13,8 @@ This directory contains various templates that are utilized throughout Project K
 ## Files
 The following files are listed in the suggested reading order (do not include this README):
 - `COMPLETED`: [README_template.md](./README_template.md) - The standard template for README files in Project Kami.
-- `COMPLETED`: [python_test_template.txt](./python_test_template.md) - The standard template for python unit tests in Project Kami.
+- `COMPLETED`: [python_test_template.md](./python_test_template.md) - The standard template for python unit tests in Project Kami.
+- `COMPLETED`: [standards_checklist.md](./standards_checklist.md) - A checklist for evaluating code against Project Kami standards.
 
 ## Directories
 The following directories are listed in the suggested reading order:
