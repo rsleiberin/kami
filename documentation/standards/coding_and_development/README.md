@@ -8,7 +8,6 @@ This directory serves as the comprehensive guide for coding and development stan
 
 ## Tasks
 - [ ] Create language-specific standards (Python, Frontend, Database)
-- [ ] Document unique method file structure
 - [ ] Provide LLM library update guidelines
 - [ ] Tackle AI context management challenges
 - [ ] Develop AGI logic and pseudo-code translation processes
@@ -24,7 +23,7 @@ The following files are listed in the suggested reading order:
 ## Directories
 The following directories are listed in the suggested reading order:
 - `PENDING`: [utility_functions](./utility_functions) - Standards and guidelines for utility functions across languages.
-- `In Progress`: [python](./python) - Standards and best practices for Python development.
+- `PENDING`: [python](./python) - Standards and best practices for Python development.
 - `In Progress`: [frontend](./frontend) - Guidelines for frontend languages like HTML, CSS, and JavaScript.
 - `In Progress`: [database](./database) - Best practices for database languages like SQL.
 

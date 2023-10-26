@@ -11,7 +11,7 @@ List the tasks that this directory or file aims to achieve or has already achiev
 - [ ] Task 1
 - [ ] Task 2
 
-## [IMPORTANT FOR CONTEXT] Directories
+## Directories
 The following directories are listed in the suggested reading order:
 - `In Progress`: [Sub-directory 1](./path/to/subdir-1) - Brief description here
 - `Completed`: [Sub-directory 2](./path/to/subdir-2) - Brief description here
