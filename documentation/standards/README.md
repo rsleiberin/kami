@@ -20,7 +20,6 @@ The following directories are listed in the suggested reading order:
 
 - `COMPLETED`: [initialization_and_startup](./initialization_and_startup) - Guides for setting up new projects or modules.
 - `PENDING`: [coding_and_development](./coding_and_development) - Standards and best practices for writing code.
-- `In Progress`: [debugging_and_testing](./debugging_and_testing) - Guidelines for debugging code and executing tests.
 - `In Progress`: [review_and_update](./review_and_update) - Procedures for reviewing and updating code.
 - `In Progress`: [deployment_and_monitoring](./deployment_and_monitoring) - Instructions for deploying and monitoring the system.
 - `In Progress`: [documentation_and_comments](./documentation_and_comments) - Standards for inline documentation and commenting.

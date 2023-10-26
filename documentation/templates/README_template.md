@@ -24,6 +24,12 @@ The following tasks are listed in the suggested completion order:
 - [ ] <module task 2>
 - [ ] <module task ...>
 
+## Files
+The following files are listed in the suggested reading order (do not include this README):
+- `In Progress`: [File 1](./path/to/file-1) - Brief description here
+- `Completed`: [File 2](./path/to/file-2) - Brief description here
+
+(If no files are available, indicate as "None currently available")
 
 ## Directories
 The following directories are listed in the suggested reading order:
@@ -31,13 +37,6 @@ The following directories are listed in the suggested reading order:
 - `Completed`: [Sub-directory 2](./path/to/subdir-2) - Brief description here
 
 (If no directories are available, indicate as "None currently available")
-
-## [IMPORTANT FOR CONTEXT] Files
-The following files are listed in the suggested reading order (do not include this README):
-- `In Progress`: [File 1](./path/to/file-1) - Brief description here
-- `Completed`: [File 2](./path/to/file-2) - Brief description here
-
-(If no files are available, indicate as "None currently available")
 
 ## Special Considerations
 ### For Humans
