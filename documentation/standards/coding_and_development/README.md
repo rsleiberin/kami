@@ -15,6 +15,7 @@ The following files are listed in the suggested reading order (do not include th
 - `COMPLETED`: [coding_workflow.md](./coding_workflow.md) - Describes the iterative development and coding workflow.
 - `COMPLETED`: [class_structure.md](./class_structure.md) - Standards for organizing classes and their methods.
 - `COMPLETED`: [iterative_development.md](./iterative_development.md) - Guidelines for iterative development and task decomposition.
+- `COMPLETED`: [debugging_practices.md](./debugging_practices.md) Describes how debugging works within Project Kami's unique development system.
 - `COMPLETED`: [testing_procedure.md](./testing_procedure.md) - Describes testing procedures, including unit and integration tests.
 - `COMPLETED`: [README_updates.md](./README_updates.md) - Guidelines for updating README files within Project Kami.
 
