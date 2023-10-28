@@ -7,7 +7,7 @@ This directory serves as a comprehensive guide to the standards and procedures t
 - `PENDING`
 
 ## Tasks
-- [ ] Update language specific standards in coding_and_development for frontend and database.
+- [ ] Update language specific standards in coding_and_development for frontend and database once development of these topics commences.
 
 ## Files
 The following files are listed in the suggested reading order (do not include this README):

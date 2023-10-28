@@ -1,7 +1,7 @@
 # Print Tracer Function Standardization
 
 ## Introduction
-The `print_tracer` function serves as a critical utility for debugging and context awareness in Project Kami. It is an essential part of the system's feedback loop, providing real-time data that the Limited Language Model (LLM) uses to understand the results of its actions, thereby contributing to the awareness of agency. This document aims to standardize the structure and usage of `print_tracer` as it will be extended to support multiple programming languages.
+The `print_tracer` function serves as a critical utility for debugging and context awareness in Project Kami. It is an essential part of the system's feedback loop, providing real-time data that the Large Language Model (LLM) uses to understand the results of its actions, thereby contributing to the awareness of agency. This document aims to standardize the structure and usage of `print_tracer` as it will be extended to support multiple programming languages.
 
 ## Essential Elements
 

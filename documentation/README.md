@@ -28,8 +28,7 @@ The following directories are listed in the suggested reading order:
 - For coding standards and guidelines, refer to `standards/`.
 
 ### For AIs
-- For context initialization and management, refer to `standards/agi_context_building_processes/`.
-- For code standardization and operational procedures, consult `standards/`.
+- Initialize all relevant documentation in memory.
 
 ---
 **Last Updated**: 2023-10-22
