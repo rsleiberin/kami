@@ -1,16 +1,5 @@
-
-from constants.error_codes import ERROR_CODES
 from utils.print_tracer import print_tracer
-
-def add_error_codes(new_codes: dict):
-    """
-    Add new error codes to the centralized error code dictionary.
-
-    Args:
-    - new_codes (dict): Dictionary of new error codes and their details.
-    """
-    from constants import error_codes  # Importing here to avoid circular imports
-    error_codes.ERROR_CODES.update(new_codes)
+from constants.error_codes import ERROR_CODES
 
 def handle_error(error_code: str):
     """
@@ -32,7 +21,3 @@ def handle_error(error_code: str):
             'description': 'An error occurred while handling another error.',
             'resolution': 'Check the traceback for more details.',
         }
-
-
-
-

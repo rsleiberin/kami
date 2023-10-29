@@ -1,6 +1,6 @@
 # Import Section: Standard libraries, third-party libraries, application libraries
 import json
-from utils.utils import print_tracer
+from utils.print_tracer import print_tracer
 
 class ChatGPTAssistant:  # Extend the existing class
     

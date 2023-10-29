@@ -26,8 +26,7 @@ The LLM directory houses the logic and infrastructure for various Large Language
 - `PENDING`: [API Structure](./api_structure.py) - Defines the API functionalities for each LLM.
 
 ## Directories
-- `In Progress`: [ChatGPT](./chat_gpt_llm) - Houses the functionalities and logic for the ChatGPT LLM.
-- `PENDING`: [Other LLMs](./other_llms) - Directory for other LLMs as they get integrated.
+- `In Progress`: [chat_gpt_llm](./chat_gpt_llm) - Houses the functionalities and logic for the ChatGPT LLM.
 
 ## Special Considerations
 ### For Humans

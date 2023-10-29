@@ -1,6 +1,7 @@
 # Import Section: Standard libraries, third-party libraries, application libraries
 import json
-from utils.utils import print_tracer, handle_error  # Assuming print_tracer and handle_error are in utils.utils
+from utils.print_tracer import print_tracer
+from utils.handle_error import handle_error
 
 class ChatGPTAssistant:  # Extend the existing class
 

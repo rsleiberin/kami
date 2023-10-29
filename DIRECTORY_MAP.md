@@ -1,10 +1,10 @@
-- [In Progress] `constants/`: Directory of hardcoded constants required by the software.
-- [In Progress] `context_management/`: Handles agent context windows; primary value of the project.
+- [PENDING] `constants/`: Directory of hardcoded constants required by the software.
+- [PENDING] `context_management/`: Handles agent context windows; primary value of the project.
 - [PENDING] `documentation/`: Contains all the standards for the project.
 - [RESTRICTED] `kami/`: Source environment for the Flask application.
 - [In Progress] `llm/`: Houses the logic for various LLMs.
-- [In Progress] `modules/`: Central controller and module registry for the application.
-- [In Progress] `safety/`: Houses all safety-related software and modules.
+- [PENDING] `modules/`: Central controller and module registry for the application.
+- [PENDING] `safety/`: Houses all safety-related software and modules.
 - [AUTOMATED] `tests/`: Contains unit tests for the project.
 - [In Progress] `utils/`: Utility module with methods accessible by all modules.
 - [RESTRICTED] `config/`: Could contain configuration files and scripts.

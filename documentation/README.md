@@ -13,13 +13,17 @@ This directory contains all essential documentation for Project Kami. It's desig
 
 ## Files
 The following files are listed in the suggested reading order (do not include this README):
-- `In Progress`: [Project Overview](./Project_Overview.md) - Provides a comprehensive overview of Project Kami, including its structure, key technologies, and future roadmap.
+- `DEPRECIATED`: [Project Overview](./Project_Overview.md) - Provides a comprehensive overview of Project Kami, including its structure, key technologies, and future roadmap.
 
 ## Directories
 The following directories are listed in the suggested reading order:
 - `PENDING`: [standards](./standards) - Contains guidelines and procedures that outline the standards for code, design, and operation within Project Kami.
-- `In Progress`: [modules](./modules) - Contains documentation for each module.
-- `In Progress`: [templates](./templates) - Houses templates for various document types, including READMEs and guides.
+- `In progress`: [llm](./llm) Contains documentation for each large language model.
+- `PENDING`: [context_management](./context_management) Contains documentation for the context manager.
+- `PENDING`: [safety](./saftey) Contains documentation for the safety systems in place.
+- `PENDING`: [modules](./modules) - Contains documentation for each module.
+- `PENDING`: [templates](./templates) - Houses templates for various document types, including READMEs and guides.
+- `PENDING`
 - `DEPRECIATED`: [agi_context_building_processes](./agi_context_building_processes) - Standards for building and managing AGI context.
 
 ## Special Considerations

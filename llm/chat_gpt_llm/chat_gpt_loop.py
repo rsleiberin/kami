@@ -1,5 +1,5 @@
 # Import Section
-from utils.utils import print_tracer
+from utils.print_tracer import print_tracer
 
 # Extend the existing ChatGPTAssistant class
 class ChatGPTAssistant:

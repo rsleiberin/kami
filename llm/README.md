@@ -23,7 +23,9 @@ The LLM directory houses the logic and infrastructure for various Large Language
 
 ## Files
 - `In Progress`: [LLM Switcher](./llm_switcher.py) - Logic for routing and managing different LLM instances.
-- `PENDING`: [API Structure](./api_structure.py) - Defines the API functionalities for each LLM.
+- `In Progress`: [API Structure](./api_structure.py) - Defines the API functionalities for each LLM.
+- `Depreciated`: pseudo_llm_switcher.txt
+- `Depreciated`: pseudo_function_processor.txt
 
 ## Directories
 - `In Progress`: [ChatGPT](./chat_gpt_llm) - Houses the functionalities and logic for the ChatGPT LLM.

@@ -1,7 +1,9 @@
 # Import Section: Sorted according to PEP8
 from context_management.context_manager import ContextManager
 from config import OPENAI_API_KEY
-from utils.utils import print_tracer
+from utils.print_tracer import print_tracer
+
+#class extensions
 from llm.chat_gpt_llm.chat_gpt_loop import ChatGPTAssistant as ChatGPTAssistant_Loop
 from llm.chat_gpt_llm.chat_gpt_send import ChatGPTAssistant as ChatGPTAssistant_Send
 from llm.chat_gpt_llm.chat_gpt_receive import ChatGPTAssistant as ChatGPTAssistant_Receive
