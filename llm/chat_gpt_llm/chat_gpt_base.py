@@ -5,9 +5,9 @@ from utils.print_tracer import print_tracer
 
 #class extensions
 from llm.chat_gpt_llm.chat_gpt_loop import ChatGPTAssistant as ChatGPTAssistant_Loop
-from llm.chat_gpt_llm.chat_gpt_send import ChatGPTAssistant as ChatGPTAssistant_Send
+from llm.chat_gpt_llm.chat_gpt_send_to_chat_gpt import ChatGPTAssistant as ChatGPTAssistant_Send
 from llm.chat_gpt_llm.chat_gpt_receive import ChatGPTAssistant as ChatGPTAssistant_Receive
-from llm.chat_gpt_llm.chat_gpt_functions import ChatGPTAssistant as ChatGPTAssistant_Functions
+from llm.chat_gpt_llm.chat_gpt_handle_function_call import ChatGPTAssistant as ChatGPTAssistant_Functions
 
 # Pseudo-Code:
 # 1. Extend ChatGPTAssistant from multiple other classes.

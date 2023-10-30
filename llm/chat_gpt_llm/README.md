@@ -21,10 +21,7 @@ The ChatGPT LLM directory is dedicated to the functionalities, logic, and intera
 - `Completed`: [ChatGPT Loop](./chat_gpt_loop.py) - Manages the loop mechanism for dynamic context updates.
 - `Completed`: [ChatGPT Send](./chat_gpt_send.py) - Handles sending messages to ChatGPT LLM.
 - `Completed`: [ChatGPT Receive](./chat_gpt_receive.py) - Handles receiving messages from ChatGPT LLM.
-- `Depreciated`: [Run Function](./run_function.py) - Executes functions post parsing and validation.
-
-## Directories
-- `Depreciated`: [Pseudos](./pseudos) - Houses pseudocode for the ChatGPT LLM.
+- `In Progress`: [ChatGPT Handle Function Call](./chat_gpt_handle_function_call.py) - Handles function calls post parsing, validation, and permissions check.
 
 ## Special Considerations
 ### For Humans
@@ -34,12 +31,3 @@ The ChatGPT LLM directory is dedicated to the functionalities, logic, and intera
 ### For AIs
 - Validate and log all interactions with the ChatGPT LLM.
 - Abide by the specific directory structure and design guidelines, emphasizing asynchronous task operations.
-
-## Flow
-1. User inputs a query or command.
-2. The `ChatGPTAssistant` class processes the input, fetching the relevant context if necessary.
-3. The input, along with the context, is sent to the OpenAI API.
-4. The ChatGPT model generates a response based on the input and context.
-5. The response is processed, potentially invoking certain functions or actions.
-6. The processed response is presented back to the user.
-7. Steps 1-6 repeat until the user exits the interaction or an error occurs.

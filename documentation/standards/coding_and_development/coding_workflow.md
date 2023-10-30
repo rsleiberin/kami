@@ -17,7 +17,9 @@ The coding workflow in Project Kami is structured into distinct phases to manage
 - Update the README to mark the status of each task as "In Progress".
 
 ### 3. Code Development
-- Begin with a high-level pseudo-code outline in each file.
+- Begin with a high-level pseudo-code for the class.
+- Use the class pseudo-code to write out pseudo-code for each method.
+- Psuedo code will be placed in the documentation directory, mirroring the modules structure.
 - In iterative passes, transition from pseudo-code to functional code, marking incomplete sections with TODO comments.
 
 ### 4. Standards Adherence
