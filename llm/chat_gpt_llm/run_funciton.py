@@ -7,7 +7,7 @@ run_function_registry = {
     # Add more functions here
 }
 
-def Run(json_string):
+def handle_function_call(json_string):
     try:
         # Parse the JSON string to get function name and arguments
         data = json.loads(json_string)
